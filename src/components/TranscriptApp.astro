@@ -1,0 +1,1241 @@
+---
+---
+
+<section id="app" class="relative pt-6 sm:pt-10 pb-6 px-3.5 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+
+  <!-- Eyebrow & Hero Copy -->
+  <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm font-semibold mb-4 sm:mb-5">
+      <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+      <span>IA para transcrever vídeo do YouTube online grátis</span>
+    </div>
+    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#111111] leading-[1.16] sm:leading-[1.12] mb-4 sm:mb-6" data-i18n="hero.title">
+      Transcrever Vídeo YouTube <br class="hidden sm:inline" />
+      <span class="bg-gradient-to-r from-[#0070f3] via-[#7928ca] to-[#ff0080] bg-clip-text text-transparent">em texto online e grátis.</span>
+    </h1>
+
+    <p class="text-base sm:text-xl text-[#374151] leading-relaxed max-w-2xl mx-auto px-1 sm:px-0" data-i18n="hero.subtitle">
+      Cole qualquer link do YouTube para transcrever vídeo do YouTube em texto instantaneamente com IA, legendas automáticas, timestamps sincronizados e exportação para TXT, SRT e Markdown.
+    </p>
+  </div>
+
+  <!-- Main Input Card -->
+  <div class="max-w-3xl mx-auto mb-8 sm:mb-12 w-full">
+    <div class="bg-white border border-[#ebebeb] rounded-2xl p-2.5 sm:p-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all focus-within:border-[#111111] focus-within:shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+      <form id="transcript-form" class="flex flex-col sm:flex-row gap-2 sm:gap-2.5">
+        <div class="relative flex-1 flex items-center min-w-0">
+          <div class="absolute left-3.5 text-[#6b7280] pointer-events-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+            </svg>
+          </div>
+          <input
+            id="url-input"
+            type="text"
+            placeholder="Cole o link do YouTube ou ID do vídeo"
+            data-i18n-placeholder="form.placeholder"
+            class="w-full pl-11 pr-3 sm:pr-4 py-3 sm:py-3.5 text-sm sm:text-lg bg-transparent border-0 text-[#111111] placeholder:text-[#6b7280] focus:outline-none focus:ring-0 font-sans"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          id="submit-btn"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-full bg-[#111111] text-white text-sm sm:text-base font-semibold hover:bg-[#2b2b2b] active:scale-[0.98] transition-all shadow-sm cursor-pointer whitespace-nowrap font-sans shrink-0 touch-target"
+        >
+          <span id="btn-text" data-i18n="form.btn_extract">Extrair Transcrição</span>
+          <svg id="btn-icon" class="w-4 h-4 transition-transform group-hover:translate-x-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+          <span id="btn-spinner" class="hidden w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin shrink-0"></span>
+        </button>
+      </form>
+
+      <!-- Mode Selector & Quick Presets -->
+      <div class="mt-3 sm:mt-3.5 pt-3 border-t border-[#f2f2f2] px-1 sm:px-2 flex flex-col md:flex-row md:items-center justify-between gap-3 text-sm">
+        <!-- Quick Sample Videos -->
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <span class="text-[#4b5563] font-semibold text-xs shrink-0" data-i18n="samples.title">Exemplos rápidos:</span>
+          <button type="button" class="sample-btn px-2.5 py-1 rounded-[6px] bg-[#fafafa] border border-[#ebebeb] text-[#374151] hover:bg-[#f2f2f2] hover:text-[#111111] transition-colors text-xs font-medium shrink-0 cursor-pointer" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+            Rick Astley
+          </button>
+          <button type="button" class="sample-btn px-2.5 py-1 rounded-[6px] bg-[#fafafa] border border-[#ebebeb] text-[#374151] hover:bg-[#f2f2f2] hover:text-[#111111] transition-colors text-xs font-medium shrink-0 cursor-pointer" data-url="https://www.youtube.com/watch?v=UF8uR6Z6KLc">
+            Steve Jobs
+          </button>
+          <button type="button" class="sample-btn px-2.5 py-1 rounded-[6px] bg-[#fafafa] border border-[#ebebeb] text-[#374151] hover:bg-[#f2f2f2] hover:text-[#111111] transition-colors text-xs font-medium shrink-0 cursor-pointer" data-url="https://www.youtube.com/watch?v=3qHkcs3kG6U">
+            Lex Fridman
+          </button>
+        </div>
+
+        <!-- Method Selector -->
+        <div class="flex items-center gap-1 bg-[#fafafa] p-1 rounded-[6px] border border-[#ebebeb] w-full md:w-auto">
+          <button type="button" id="method-auto" class="method-toggle active flex-1 md:flex-initial text-center px-2.5 sm:px-3 py-1 rounded-[4px] text-xs sm:text-sm font-semibold bg-white text-[#111111] shadow-xs cursor-pointer" data-i18n="method.auto">
+            Automático (CC + Fallback)
+          </button>
+          <button type="button" id="method-cc" class="method-toggle flex-1 md:flex-initial text-center px-2.5 sm:px-3 py-1 rounded-[4px] text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#111111] cursor-pointer" data-i18n="method.cc">
+            Apenas CC
+          </button>
+          <button type="button" id="method-fallback" class="method-toggle flex-1 md:flex-initial text-center px-2.5 sm:px-3 py-1 rounded-[4px] text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#111111] cursor-pointer" data-i18n="method.fallback">
+            Fallback Gratuito
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Banner -->
+    <div id="error-box" class="hidden mt-3 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm sm:text-base flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 min-w-0">
+        <svg class="w-5 h-5 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span id="error-message" class="break-words" data-i18n="error.default">Error processing video</span>
+      </div>
+      <button type="button" id="dismiss-error" class="text-red-500 hover:text-red-700 font-semibold text-xs sm:text-sm shrink-0 cursor-pointer" data-i18n="error.dismiss">Dismiss</button>
+    </div>
+  </div>
+
+  <!-- Loading State Banner -->
+  <div id="loading-state" class="hidden max-w-xl mx-auto my-8 sm:my-12 text-center p-5 sm:p-8 bg-white border border-[#ebebeb] rounded-2xl shadow-sm">
+    <div class="inline-block w-8 h-8 border-2 border-[#111111]/20 border-t-[#111111] rounded-full animate-spin mb-4"></div>
+    <h3 class="text-base sm:text-lg font-bold text-[#111111] mb-1" id="loading-title" data-i18n="loading.title">Extracting Transcript...</h3>
+    <p class="text-xs sm:text-sm text-[#4b5563] font-medium mb-4" id="loading-desc" data-i18n="loading.desc">Checking native YouTube caption tracks</p>
+    
+    <div class="w-full bg-[#f2f2f2] rounded-full h-2 overflow-hidden">
+      <div id="loading-bar" class="bg-[#111111] h-full w-1/3 transition-all duration-300"></div>
+    </div>
+  </div>
+
+  <!-- Results Workspace (Hidden initially) -->
+  <div id="results-workspace" class="hidden max-w-7xl mx-auto space-y-5 sm:space-y-6 w-full">
+    <!-- Active Status Bar -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 sm:p-3.5 bg-white border border-[#ebebeb] rounded-xl text-sm">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span id="status-method-badge" class="px-2.5 sm:px-3 py-1 rounded-[6px] font-semibold text-xs sm:text-sm bg-emerald-50 text-emerald-800 border border-emerald-200" data-i18n="status.method_cc">
+          Direct YouTube CC API
+        </span>
+        <span id="status-lang-badge" class="hidden px-2.5 sm:px-3 py-1 rounded-[6px] font-semibold text-xs sm:text-sm bg-blue-50 text-blue-800 border border-blue-200 items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+          <span id="status-lang-text">English (Native)</span>
+        </span>
+      </div>
+
+      <!-- Quick Feature Bar (Translate) -->
+      <div class="flex items-center gap-2 bg-[#fafafa] border border-[#ebebeb] px-2.5 py-1.5 rounded-[6px] w-full sm:w-auto justify-between sm:justify-start">
+        <div class="flex items-center gap-2 min-w-0">
+          <svg class="w-4 h-4 text-[#6b7280] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+          </svg>
+          <select id="lang-select" class="bg-transparent text-xs sm:text-sm text-[#111111] font-semibold border-0 focus:ring-0 focus:outline-none cursor-pointer pr-1 truncate max-w-[220px] sm:max-w-none">
+            <option value="en">English (Original)</option>
+            <option value="es">Spanish (Español)</option>
+            <option value="fr">French (Français)</option>
+            <option value="de">German (Deutsch)</option>
+            <option value="it">Italian (Italiano)</option>
+            <option value="pt">Portuguese (Português)</option>
+            <option value="ja">Japanese (日本語)</option>
+            <option value="ko">Korean (한국어)</option>
+            <option value="zh">Chinese (中文)</option>
+            <option value="hi">Hindi (हिन्दी)</option>
+            <option value="ar">Arabic (العربية)</option>
+            <option value="ru">Russian (Русский)</option>
+            <option value="nl">Dutch (Nederlands)</option>
+            <option value="tr">Turkish (Türkçe)</option>
+            <option value="vi">Vietnamese (Tiếng Việt)</option>
+            <option value="pl">Polish (Polski)</option>
+          </select>
+        </div>
+        <span id="trans-spinner" class="hidden w-3.5 h-3.5 border-2 border-black/30 border-t-black rounded-full animate-spin shrink-0"></span>
+      </div>
+    </div>
+
+    <!-- Main Grid: Video Player + Transcript Explorer -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+      <!-- Left Column: Video Embed & Meta (5 cols) -->
+      <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-20">
+        <!-- Responsive Video Player Embed -->
+        <div class="bg-black rounded-xl overflow-hidden shadow-sm aspect-video relative border border-[#ebebeb] w-full">
+          <iframe
+            id="video-player"
+            class="w-full h-full"
+            src=""
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <!-- Video Metadata Card -->
+        <div class="bg-white border border-[#ebebeb] rounded-xl p-3.5 sm:p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] space-y-2.5">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0">
+              <h2 id="video-title" class="text-sm sm:text-lg font-bold text-[#111111] leading-snug line-clamp-2">
+                Video Title
+              </h2>
+              <p id="video-author" class="text-xs sm:text-sm font-medium text-[#4b5563] mt-1 truncate">
+                Channel Name
+              </p>
+            </div>
+            <a id="video-link" href="#" target="_blank" rel="noopener noreferrer" class="p-2 rounded-[6px] text-[#6b7280] hover:text-[#111111] hover:bg-[#f2f2f2] transition-colors shrink-0" title="Open in YouTube" data-i18n-title="video.open_yt">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Video Quick Actions -->
+          <div class="pt-2.5 border-t border-[#f2f2f2] flex items-center justify-between text-xs sm:text-sm text-[#4b5563]">
+            <span data-i18n="video.click_seek">Click timestamp to seek:</span>
+            <span id="current-timecode" class="text-[#111111] font-bold text-xs sm:text-base">00:00</span>
+          </div>
+        </div>
+
+        <!-- Unwanted Sections Filter & Trimmer -->
+        <div class="bg-white border border-[#ebebeb] rounded-xl p-3.5 sm:p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-sm sm:text-base font-bold text-[#111111] flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#4b5563] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/>
+              </svg>
+              <span data-i18n="trim.title">Remove Unwanted Sections</span>
+            </span>
+            <span class="text-xs px-2 py-0.5 rounded bg-[#f2f2f2] text-[#374151] font-semibold shrink-0" data-i18n="trim.badge">Smart Trim</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[#374151] leading-relaxed" data-i18n="trim.desc">
+            Quickly remove intros, outros, or sponsor pitches from your transcript and exports:
+          </p>
+
+          <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm">
+            <button type="button" id="trim-intro-btn" class="px-2.5 sm:px-3 py-2 rounded-[6px] border border-[#ebebeb] bg-[#fafafa] hover:bg-[#f2f2f2] text-[#374151] text-center sm:text-left transition-colors cursor-pointer font-medium truncate" data-i18n="trim.intro_btn">
+              ✂️ Skip Intro (30s)
+            </button>
+            <button type="button" id="trim-outro-btn" class="px-2.5 sm:px-3 py-2 rounded-[6px] border border-[#ebebeb] bg-[#fafafa] hover:bg-[#f2f2f2] text-[#374151] text-center sm:text-left transition-colors cursor-pointer font-medium truncate" data-i18n="trim.outro_btn">
+              ✂️ Skip Outro (30s)
+            </button>
+          </div>
+
+          <button type="button" id="strip-sponsors-btn" class="w-full px-3 py-2 rounded-[6px] border border-violet-200 bg-violet-50 text-violet-800 hover:bg-violet-100 text-xs sm:text-sm font-semibold text-left transition-colors flex items-center justify-between gap-2 cursor-pointer">
+            <span class="truncate" id="strip-sponsors-text" data-i18n="trim.sponsors_btn">🛡️ Strip Sponsors & Fluff</span>
+            <span class="text-xs font-semibold shrink-0" data-i18n="trim.auto_filter">Auto-Filter</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Transcript Explorer (7 cols) -->
+      <div class="lg:col-span-7 space-y-4">
+        <!-- Transcript Toolbar Card -->
+        <div class="bg-white border border-[#ebebeb] rounded-xl p-3 sm:p-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] space-y-3">
+          <!-- Top Row: Search & View Toggles -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3">
+            <!-- Search Filter -->
+            <div class="relative flex-1">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Search within transcript..."
+                data-i18n-placeholder="search.placeholder"
+                class="w-full pl-9 pr-20 py-2 sm:py-2.5 text-xs sm:text-sm bg-[#fafafa] border border-[#ebebeb] rounded-[6px] text-[#111111] placeholder:text-[#6b7280] focus:outline-none focus:border-[#111111] focus:bg-white transition-colors"
+              />
+              <svg class="w-4 h-4 text-[#6b7280] absolute left-3 top-2.5 sm:top-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+              <span id="search-count" class="hidden absolute right-2.5 top-2 sm:top-2.5 px-2 py-0.5 rounded text-xs bg-[#ebebeb] text-[#374151] font-semibold">
+                0 found
+              </span>
+            </div>
+
+            <!-- View Switchers -->
+            <div class="flex items-center bg-[#fafafa] p-1 rounded-[6px] border border-[#ebebeb] shrink-0 justify-center">
+              <button id="view-segments" type="button" class="flex-1 sm:flex-initial px-3 py-1.5 rounded-[4px] text-xs sm:text-sm font-semibold bg-white text-[#111111] shadow-xs cursor-pointer" data-i18n="view.timestamps">
+                Timestamps
+              </button>
+              <button id="view-paragraphs" type="button" class="flex-1 sm:flex-initial px-3 py-1.5 rounded-[4px] text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#111111] cursor-pointer" data-i18n="view.continuous">
+                Continuous
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Row: Multi-Format Exports & Timestamps Toggle -->
+          <div class="pt-3 border-t border-[#f2f2f2] space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[#4b5563] font-semibold text-xs sm:text-sm" data-i18n="export.label">Export formats:</span>
+              
+              <!-- Timestamps Toggle for Exports -->
+              <button
+                type="button"
+                id="export-timestamps-toggle"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-emerald-200 bg-emerald-50 text-xs sm:text-sm font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors cursor-pointer select-none"
+                title="Toggle timestamps in downloaded transcripts"
+              >
+                <span id="export-ts-dot" class="w-2 h-2 rounded-full bg-emerald-500 transition-colors"></span>
+                <span id="export-ts-label" class="font-semibold text-xs sm:text-sm" data-i18n="export.ts_on">Timestamps: ON</span>
+              </button>
+            </div>
+
+            <!-- Export Buttons Grid -->
+            <div class="grid grid-cols-3 sm:flex sm:items-center sm:flex-wrap gap-1.5">
+              <button type="button" id="export-txt" class="export-btn px-2 sm:px-3 py-1.5 rounded-[6px] border border-[#ebebeb] bg-white hover:bg-[#f2f2f2] text-[#111111] font-semibold text-xs sm:text-sm text-center transition-colors cursor-pointer" title="Plain text transcript" data-i18n-title="export.txt_title">
+                .TXT
+              </button>
+              <button type="button" id="export-srt" class="export-btn px-2 sm:px-3 py-1.5 rounded-[6px] border border-[#ebebeb] bg-white hover:bg-[#f2f2f2] text-[#111111] font-semibold text-xs sm:text-sm text-center transition-colors cursor-pointer" title="SubRip subtitle format (.srt)" data-i18n-title="export.srt_title">
+                .SRT
+              </button>
+              <button type="button" id="export-vtt" class="export-btn px-2 sm:px-3 py-1.5 rounded-[6px] border border-[#ebebeb] bg-white hover:bg-[#f2f2f2] text-[#111111] font-semibold text-xs sm:text-sm text-center transition-colors cursor-pointer" title="WebVTT subtitle format (.vtt)" data-i18n-title="export.vtt_title">
+                .VTT
+              </button>
+              <button type="button" id="export-md" class="export-btn px-2 sm:px-3 py-1.5 rounded-[6px] border border-[#ebebeb] bg-white hover:bg-[#f2f2f2] text-[#111111] font-semibold text-xs sm:text-sm text-center transition-colors cursor-pointer" title="Markdown formatted document (.md)" data-i18n-title="export.md_title">
+                .MD
+              </button>
+              <button type="button" id="export-json" class="export-btn px-2 sm:px-3 py-1.5 rounded-[6px] border border-[#ebebeb] bg-white hover:bg-[#f2f2f2] text-[#111111] font-semibold text-xs sm:text-sm text-center transition-colors cursor-pointer" title="JSON data (.json)" data-i18n-title="export.json_title">
+                .JSON
+              </button>
+              <button type="button" id="copy-all-btn" class="col-span-1 sm:col-span-auto inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-[6px] bg-[#111111] text-white font-semibold text-xs sm:text-sm hover:bg-[#2e2e2e] transition-colors cursor-pointer" title="Copy transcript to clipboard" data-i18n-title="export.copy_title">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                <span id="copy-btn-text" data-i18n="export.copy_btn">Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transcript Content Display Area -->
+        <div class="bg-white border border-[#ebebeb] rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.03)] overflow-hidden">
+          <div id="transcript-container" class="max-h-[480px] sm:max-h-[620px] overflow-y-auto p-3 sm:p-6 custom-scrollbar divide-y divide-[#f2f2f2]">
+            <!-- Transcript items injected via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-sm z-50 transform translate-y-16 opacity-0 transition-all duration-200 pointer-events-none">
+    <div class="bg-[#111111] text-white px-4 sm:px-5 py-3 rounded-lg shadow-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 border border-white/10">
+      <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+      </svg>
+      <span id="toast-text" class="break-words">Copied to clipboard</span>
+    </div>
+  </div>
+</section>
+
+<!-- Client JavaScript App Engine -->
+<script>
+  import { getTranslation, getCurrentSiteLang } from '../utils/i18n';
+
+  let state = {
+    url: '',
+    videoId: '',
+    videoMeta: null as any,
+    rawSegments: [] as any[],
+    originalSegments: [] as any[],
+    segments: [] as any[],
+    cleanedSegments: [] as any[],
+    cleanFillers: false,
+    trimIntroSec: 0,
+    trimOutroSec: 0,
+    stripSponsorsActive: false,
+    currentLang: 'en',
+    originalLang: '',
+    availableLanguages: [] as any[],
+    viewMode: 'segments', // 'segments' or 'paragraphs'
+    includeTimestamps: true,
+    searchQuery: '',
+    methodUsed: 'auto', // 'auto', 'cc', 'fallback'
+    autoScroll: true
+  };
+
+  const form = document.getElementById('transcript-form') as HTMLFormElement;
+  const urlInput = document.getElementById('url-input') as HTMLInputElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text');
+  const btnSpinner = document.getElementById('btn-spinner');
+  const btnIcon = document.getElementById('btn-icon');
+  
+  const loadingState = document.getElementById('loading-state');
+  const loadingTitle = document.getElementById('loading-title');
+  const loadingDesc = document.getElementById('loading-desc');
+  const loadingBar = document.getElementById('loading-bar');
+
+  const resultsWorkspace = document.getElementById('results-workspace');
+  const errorBox = document.getElementById('error-box');
+  const errorMessage = document.getElementById('error-message');
+  const dismissError = document.getElementById('dismiss-error');
+
+  const videoPlayer = document.getElementById('video-player') as HTMLIFrameElement;
+  const videoTitle = document.getElementById('video-title');
+  const videoAuthor = document.getElementById('video-author');
+  const videoLink = document.getElementById('video-link') as HTMLAnchorElement;
+  const currentTimecode = document.getElementById('current-timecode');
+
+  const statusMethodBadge = document.getElementById('status-method-badge');
+  const statusLangBadge = document.getElementById('status-lang-badge');
+  const statusLangText = document.getElementById('status-lang-text');
+  const transcriptContainer = document.getElementById('transcript-container');
+
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const searchCount = document.getElementById('search-count');
+  const viewSegmentsBtn = document.getElementById('view-segments');
+  const viewParagraphsBtn = document.getElementById('view-paragraphs');
+
+  const langSelect = document.getElementById('lang-select') as HTMLSelectElement;
+  const transSpinner = document.getElementById('trans-spinner');
+
+  const trimIntroBtn = document.getElementById('trim-intro-btn');
+  const trimOutroBtn = document.getElementById('trim-outro-btn');
+  const stripSponsorsBtn = document.getElementById('strip-sponsors-btn');
+
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toast-text');
+
+  const exportTimestampsToggle = document.getElementById('export-timestamps-toggle');
+  const exportTsDot = document.getElementById('export-ts-dot');
+  const exportTsLabel = document.getElementById('export-ts-label');
+
+  // Check URL params on load (e.g. from bookmarklet ?url=...)
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const urlParam = params.get('url');
+    if (urlParam && urlInput) {
+      urlInput.value = urlParam;
+      submitBtn?.click();
+    }
+  });
+
+  function updateExportTimestampsUI() {
+    if (!exportTsDot || !exportTsLabel || !exportTimestampsToggle) return;
+    const curLang = getCurrentSiteLang();
+    if (state.includeTimestamps) {
+      exportTsDot.className = 'w-2 h-2 rounded-full bg-emerald-500 transition-colors';
+      exportTsLabel.textContent = getTranslation('export.ts_on', curLang);
+      exportTimestampsToggle.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-emerald-200 bg-emerald-50 text-xs sm:text-sm font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors cursor-pointer select-none';
+    } else {
+      exportTsDot.className = 'w-2 h-2 rounded-full bg-gray-400 transition-colors';
+      exportTsLabel.textContent = getTranslation('export.ts_off', curLang);
+      exportTimestampsToggle.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-[#ebebeb] bg-[#fafafa] text-xs sm:text-sm font-semibold text-[#4b5563] hover:bg-[#f2f2f2] transition-colors cursor-pointer select-none';
+    }
+  }
+
+  function updateDynamicLabels() {
+    const curLang = getCurrentSiteLang();
+    updateExportTimestampsUI();
+    if (trimIntroBtn) {
+      trimIntroBtn.textContent = state.trimIntroSec > 0
+        ? getTranslation('trim.intro_active', curLang)
+        : getTranslation('trim.intro_btn', curLang);
+    }
+    if (trimOutroBtn) {
+      trimOutroBtn.textContent = state.trimOutroSec > 0
+        ? getTranslation('trim.outro_active', curLang)
+        : getTranslation('trim.outro_btn', curLang);
+    }
+    const stripTextEl = document.getElementById('strip-sponsors-text');
+    if (stripTextEl) {
+      stripTextEl.textContent = state.stripSponsorsActive
+        ? getTranslation('trim.sponsors_active', curLang)
+        : getTranslation('trim.sponsors_btn', curLang);
+    }
+    if (btnText && (!btnSpinner || btnSpinner.classList.contains('hidden'))) {
+      btnText.textContent = getTranslation('form.btn_extract', curLang);
+    }
+    if (statusMethodBadge && state.videoMeta) {
+      if (state.methodUsed === 'fallback') {
+        statusMethodBadge.textContent = getTranslation('status.method_fallback', curLang);
+      } else {
+        statusMethodBadge.textContent = getTranslation('status.method_cc', curLang);
+      }
+    }
+    updateLanguageDropdown();
+  }
+
+  window.addEventListener('site-language-change', (e: any) => {
+    const newLang = e.detail?.lang;
+    if (!newLang) return;
+    updateDynamicLabels();
+
+    // If a transcript is currently loaded and is in a different language, translate it to the new site language
+    if (state.rawSegments && state.rawSegments.length > 0 && state.currentLang !== newLang) {
+      if (langSelect) {
+        langSelect.value = newLang;
+        langSelect.dispatchEvent(new Event('change'));
+      }
+    }
+  });
+
+  function showToast(msg: string) {
+    if (!toast || !toastText) return;
+    toastText.textContent = msg;
+    toast.classList.remove('translate-y-16', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-16', 'opacity-0');
+    }, 2400);
+  }
+
+  function formatTime(seconds: number): string {
+    const totalSec = Math.floor(seconds);
+    const hours = Math.floor(totalSec / 3600);
+    const minutes = Math.floor((totalSec % 3600) / 60);
+    const secs = totalSec % 60;
+    if (hours > 0) {
+      return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+    return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  function formatSrtTime(seconds: number): string {
+    const totalMs = Math.floor(seconds * 1000);
+    const hours = Math.floor(totalMs / 3600000);
+    const minutes = Math.floor((totalMs % 3600000) / 60000);
+    const secs = Math.floor((totalMs % 60000) / 1000);
+    const ms = totalMs % 1000;
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')},${ms.toString().padStart(3, '0')}`;
+  }
+
+  const SPONSOR_PATTERNS = [
+    /sponsored by/i,
+    /thanks to our sponsor/i,
+    /support for today's video/i,
+    /check out the link in the description/i,
+    /use code\s+[a-z0-9_-]+/i,
+    /promo code/i,
+    /discount code/i,
+    /nordvpn/i,
+    /expressvpn/i,
+    /surfshark/i,
+    /squarespace/i,
+    /skillshare/i,
+    /brilliant\.org/i,
+    /betterhelp/i,
+    /raid shadow legends/i,
+    /smash the like button/i,
+    /subscribe to the channel/i
+  ];
+
+  function isSponsorSegment(text: string): boolean {
+    return SPONSOR_PATTERNS.some(pat => pat.test(text));
+  }
+
+  function seekVideo(seconds: number) {
+    if (!videoPlayer || !state.videoId) return;
+    const curLang = getCurrentSiteLang();
+    const seekUrl = `https://www.youtube.com/embed/${state.videoId}?autoplay=1&start=${Math.floor(seconds)}&enablejsapi=1`;
+    videoPlayer.src = seekUrl;
+    if (currentTimecode) {
+      currentTimecode.textContent = formatTime(seconds);
+    }
+    showToast(`${getTranslation('toast.jumped', curLang)} ${formatTime(seconds)}`);
+  }
+
+  // Method switcher pills
+  const methodToggles = document.querySelectorAll('.method-toggle');
+  methodToggles.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      methodToggles.forEach(t => {
+        t.classList.remove('bg-white', 'text-[#111111]', 'shadow-xs', 'active');
+        t.classList.add('text-[#6b7280]');
+      });
+      const target = e.currentTarget as HTMLElement;
+      target.classList.add('bg-white', 'text-[#111111]', 'shadow-xs', 'active');
+      target.classList.remove('text-[#6b7280]');
+      if (target.id === 'method-auto') state.methodUsed = 'auto';
+      if (target.id === 'method-cc') state.methodUsed = 'cc';
+      if (target.id === 'method-fallback') state.methodUsed = 'fallback';
+    });
+  });
+
+  // Sample quick buttons
+  document.querySelectorAll('.sample-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const url = (e.currentTarget as HTMLElement).getAttribute('data-url');
+      if (url && urlInput) {
+        urlInput.value = url;
+        submitBtn?.click();
+      }
+    });
+  });
+
+  // Dismiss Error
+  dismissError?.addEventListener('click', () => {
+    errorBox?.classList.add('hidden');
+  });
+
+  // Submit Handler
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const url = urlInput?.value.trim();
+    if (!url) return;
+
+    errorBox?.classList.add('hidden');
+    resultsWorkspace?.classList.add('hidden');
+    loadingState?.classList.remove('hidden');
+
+    const curSiteLang = getCurrentSiteLang();
+    if (btnText && btnSpinner && btnIcon) {
+      btnText.textContent = getTranslation('form.btn_extracting', curSiteLang);
+      btnSpinner.classList.remove('hidden');
+      btnIcon.classList.add('hidden');
+    }
+
+    try {
+      if (loadingTitle && loadingDesc && loadingBar) {
+        loadingTitle.textContent = state.methodUsed === 'fallback' 
+          ? getTranslation('loading.fallback_title', curSiteLang)
+          : getTranslation('loading.title', curSiteLang);
+        loadingDesc.textContent = state.methodUsed === 'fallback'
+          ? getTranslation('loading.fallback_desc', curSiteLang)
+          : getTranslation('loading.desc', curSiteLang);
+        loadingBar.style.width = '45%';
+      }
+
+      // Default transcript request language to currently selected site language
+      state.currentLang = curSiteLang || 'en';
+      state.originalLang = '';
+      state.availableLanguages = [];
+
+      const res = await fetch('/api/transcript', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url,
+          lang: state.currentLang,
+          forceFallback: state.methodUsed === 'fallback'
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        throw new Error(data.error || 'Failed to extract transcript');
+      }
+
+      if (loadingBar) loadingBar.style.width = '100%';
+
+      state.url = url;
+      state.videoId = data.video.id;
+      state.videoMeta = data.video;
+      state.rawSegments = data.segments || [];
+      state.originalSegments = JSON.parse(JSON.stringify(state.rawSegments));
+      state.segments = [...state.rawSegments];
+      state.trimIntroSec = 0;
+      state.trimOutroSec = 0;
+      state.stripSponsorsActive = false;
+
+      renderResults(data);
+    } catch (err: any) {
+      if (errorBox && errorMessage) {
+        errorMessage.textContent = err.message || 'An unexpected error occurred';
+        errorBox.classList.remove('hidden');
+      }
+    } finally {
+      loadingState?.classList.add('hidden');
+      if (btnText && btnSpinner && btnIcon) {
+        btnText.textContent = getTranslation('form.btn_extract', getCurrentSiteLang());
+        btnSpinner.classList.add('hidden');
+        btnIcon.classList.remove('hidden');
+      }
+    }
+  });
+
+  function applyTrimmingAndFilters() {
+    let filtered = [...state.rawSegments];
+
+    // Filter Intro
+    if (state.trimIntroSec > 0) {
+      filtered = filtered.filter(s => s.start >= state.trimIntroSec);
+    }
+
+    // Filter Outro
+    if (state.trimOutroSec > 0 && state.rawSegments.length > 0) {
+      const maxTime = state.rawSegments[state.rawSegments.length - 1].start;
+      const cutoff = Math.max(0, maxTime - state.trimOutroSec);
+      filtered = filtered.filter(s => s.start <= cutoff);
+    }
+
+    // Filter Sponsors
+    if (state.stripSponsorsActive) {
+      filtered = filtered.filter(s => !isSponsorSegment(s.text));
+    }
+
+    state.segments = filtered;
+    renderTranscriptList();
+  }
+
+  // Trim Intro Handler
+  trimIntroBtn?.addEventListener('click', () => {
+    state.trimIntroSec = state.trimIntroSec === 0 ? 30 : 0;
+    const curLang = getCurrentSiteLang();
+    trimIntroBtn.textContent = state.trimIntroSec > 0 
+      ? getTranslation('trim.intro_active', curLang) 
+      : getTranslation('trim.intro_btn', curLang);
+    trimIntroBtn.className = state.trimIntroSec > 0
+      ? 'px-2.5 sm:px-3 py-2 rounded-[6px] border border-blue-200 bg-blue-50 text-blue-800 text-center sm:text-left transition-colors font-semibold text-xs sm:text-sm truncate cursor-pointer'
+      : 'px-2.5 sm:px-3 py-2 rounded-[6px] border border-[#ebebeb] bg-[#fafafa] hover:bg-[#f2f2f2] text-[#374151] text-center sm:text-left transition-colors text-xs sm:text-sm font-medium truncate cursor-pointer';
+    applyTrimmingAndFilters();
+    showToast(state.trimIntroSec > 0 ? getTranslation('toast.intro_trimmed', curLang) : getTranslation('toast.intro_restored', curLang));
+  });
+
+  // Trim Outro Handler
+  trimOutroBtn?.addEventListener('click', () => {
+    state.trimOutroSec = state.trimOutroSec === 0 ? 30 : 0;
+    const curLang = getCurrentSiteLang();
+    trimOutroBtn.textContent = state.trimOutroSec > 0 
+      ? getTranslation('trim.outro_active', curLang) 
+      : getTranslation('trim.outro_btn', curLang);
+    trimOutroBtn.className = state.trimOutroSec > 0
+      ? 'px-2.5 sm:px-3 py-2 rounded-[6px] border border-blue-200 bg-blue-50 text-blue-800 text-center sm:text-left transition-colors font-semibold text-xs sm:text-sm truncate cursor-pointer'
+      : 'px-2.5 sm:px-3 py-2 rounded-[6px] border border-[#ebebeb] bg-[#fafafa] hover:bg-[#f2f2f2] text-[#374151] text-center sm:text-left transition-colors text-xs sm:text-sm font-medium truncate cursor-pointer';
+    applyTrimmingAndFilters();
+    showToast(state.trimOutroSec > 0 ? getTranslation('toast.outro_trimmed', curLang) : getTranslation('toast.outro_restored', curLang));
+  });
+
+  // Strip Sponsors Handler
+  stripSponsorsBtn?.addEventListener('click', () => {
+    state.stripSponsorsActive = !state.stripSponsorsActive;
+    const curLang = getCurrentSiteLang();
+    stripSponsorsBtn.className = state.stripSponsorsActive
+      ? 'w-full px-3 py-2 rounded-[6px] border border-emerald-300 bg-emerald-50 text-emerald-800 text-xs sm:text-sm font-semibold text-left transition-colors flex items-center justify-between gap-2 cursor-pointer'
+      : 'w-full px-3 py-2 rounded-[6px] border border-violet-200 bg-violet-50 text-violet-800 hover:bg-violet-100 text-xs sm:text-sm font-semibold text-left transition-colors flex items-center justify-between gap-2 cursor-pointer';
+    const stripTextEl = document.getElementById('strip-sponsors-text');
+    if (stripTextEl) {
+      stripTextEl.textContent = state.stripSponsorsActive 
+        ? getTranslation('trim.sponsors_active', curLang) 
+        : getTranslation('trim.sponsors_btn', curLang);
+    }
+    applyTrimmingAndFilters();
+    showToast(state.stripSponsorsActive ? getTranslation('toast.sponsors_filtered', curLang) : getTranslation('toast.sponsors_restored', curLang));
+  });
+
+  // Language selector: supports native YouTube tracks + translation
+  langSelect?.addEventListener('change', async (e) => {
+    const targetLang = (e.target as HTMLSelectElement).value;
+    if (!targetLang || targetLang === state.currentLang) return;
+
+    if (state.segments.length === 0) return;
+
+    const curLang = getCurrentSiteLang();
+    const selectedOptionText = langSelect.options[langSelect.selectedIndex]?.text || targetLang;
+    transSpinner?.classList.remove('hidden');
+    showToast(`${getTranslation('toast.translating_to', curLang)} ${selectedOptionText}...`);
+
+    try {
+      // 1. If switching back to the video's original language, restore instantly!
+      if (targetLang === state.originalLang && state.originalSegments.length > 0) {
+        state.currentLang = targetLang;
+        state.rawSegments = JSON.parse(JSON.stringify(state.originalSegments));
+        applyTrimmingAndFilters();
+        if (statusLangBadge && statusLangText) {
+          statusLangText.textContent = `${selectedOptionText} ${getTranslation('status.original_tag', curLang)}`;
+          statusLangBadge.classList.remove('hidden');
+          statusLangBadge.classList.add('inline-flex');
+        }
+        showToast(`${getTranslation('toast.restored_orig', curLang)} (${selectedOptionText})`);
+        return;
+      }
+
+      // 2. Check if video has native captions in target language
+      const isNative = state.availableLanguages.some((l: any) => l.code === targetLang);
+
+      if (isNative) {
+        const res = await fetch('/api/transcript', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            url: state.url,
+            lang: targetLang
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.segments && data.segments.length > 0) {
+          state.currentLang = targetLang;
+          state.rawSegments = data.segments;
+          applyTrimmingAndFilters();
+          if (statusLangBadge && statusLangText) {
+            statusLangText.textContent = `${data.currentLanguage?.name || selectedOptionText}${data.currentLanguage?.isOriginal ? ` ${getTranslation('status.native_tag', curLang)}` : ''}`;
+            statusLangBadge.classList.remove('hidden');
+            statusLangBadge.classList.add('inline-flex');
+          }
+          showToast(`${getTranslation('toast.loaded_native', curLang)} (${selectedOptionText})`);
+          return;
+        }
+      }
+
+      // 3. Translate using free translation engine
+      const segmentsToTranslate = state.originalSegments.length > 0 ? state.originalSegments : state.rawSegments;
+      const res = await fetch('/api/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          segments: segmentsToTranslate,
+          targetLang
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok && data.segments && Array.isArray(data.segments) && data.segments.length > 0) {
+        state.currentLang = targetLang;
+        state.rawSegments = data.segments;
+        applyTrimmingAndFilters();
+        if (statusLangBadge && statusLangText) {
+          statusLangText.textContent = `${selectedOptionText} ${getTranslation('status.translated_tag', curLang)}`;
+          statusLangBadge.classList.remove('hidden');
+          statusLangBadge.classList.add('inline-flex');
+        }
+        showToast(`${getTranslation('toast.trans_complete', curLang)} (${selectedOptionText})`);
+      } else {
+        throw new Error(data.error || 'Translation failed');
+      }
+    } catch (err: any) {
+      showToast(err.message || 'Could not translate transcript — keeping current language');
+      langSelect.value = state.currentLang;
+    } finally {
+      transSpinner?.classList.add('hidden');
+    }
+  });
+
+  const COMMON_LANGUAGES = [
+    { code: 'en', name: 'English' },
+    { code: 'es', name: 'Spanish (Español)' },
+    { code: 'fr', name: 'French (Français)' },
+    { code: 'de', name: 'German (Deutsch)' },
+    { code: 'it', name: 'Italian (Italiano)' },
+    { code: 'pt', name: 'Portuguese (Português)' },
+    { code: 'ja', name: 'Japanese (日本語)' },
+    { code: 'ko', name: 'Korean (한국어)' },
+    { code: 'zh', name: 'Chinese (中文)' },
+    { code: 'hi', name: 'Hindi (हिन्दी)' },
+    { code: 'ar', name: 'Arabic (العربية)' },
+    { code: 'ru', name: 'Russian (Русский)' },
+    { code: 'nl', name: 'Dutch (Nederlands)' },
+    { code: 'tr', name: 'Turkish (Türkçe)' },
+    { code: 'vi', name: 'Vietnamese (Tiếng Việt)' },
+    { code: 'pl', name: 'Polish (Polski)' }
+  ];
+
+  function updateLanguageDropdown() {
+    if (!langSelect) return;
+    langSelect.innerHTML = '';
+    const curLang = getCurrentSiteLang();
+
+    const addedCodes = new Set<string>();
+
+    // 1. Add native YouTube caption tracks detected for this video
+    if (state.availableLanguages && state.availableLanguages.length > 0) {
+      const nativeOptGroup = document.createElement('optgroup');
+      nativeOptGroup.label = getTranslation('status.native_group', curLang);
+
+      state.availableLanguages.forEach((l: any) => {
+        const opt = document.createElement('option');
+        opt.value = l.code;
+        opt.textContent = l.isOriginal ? `★ ${l.name} ${getTranslation('status.original_tag', curLang)}` : l.name;
+        if (l.code === state.currentLang) {
+          opt.selected = true;
+        }
+        nativeOptGroup.appendChild(opt);
+        addedCodes.add(l.code.toLowerCase());
+      });
+
+      langSelect.appendChild(nativeOptGroup);
+    }
+
+    // 2. Add translation options for other languages
+    const transOptGroup = document.createElement('optgroup');
+    transOptGroup.label = getTranslation('status.translate_group', curLang);
+
+    COMMON_LANGUAGES.forEach(l => {
+      if (!addedCodes.has(l.code.toLowerCase())) {
+        const opt = document.createElement('option');
+        opt.value = l.code;
+        opt.textContent = l.name;
+        if (l.code === state.currentLang) {
+          opt.selected = true;
+        }
+        transOptGroup.appendChild(opt);
+      }
+    });
+
+    if (transOptGroup.children.length > 0) {
+      langSelect.appendChild(transOptGroup);
+    }
+
+    langSelect.value = state.currentLang;
+  }
+
+  function renderResults(data: any) {
+    if (!resultsWorkspace) return;
+    resultsWorkspace.classList.remove('hidden');
+
+    // Video Player Embed
+    if (videoPlayer) {
+      videoPlayer.src = `https://www.youtube.com/embed/${data.video.id}?enablejsapi=1`;
+    }
+    if (videoTitle) videoTitle.textContent = data.video.title;
+    if (videoAuthor) videoAuthor.textContent = data.video.author;
+    if (videoLink) videoLink.href = data.video.url;
+
+    // Language state and badge
+    state.currentLang = data.currentLanguage?.code || data.originalLanguage || 'en';
+    state.originalLang = data.originalLanguage || state.currentLang;
+    state.availableLanguages = data.languages || [];
+
+    if (statusLangBadge && statusLangText) {
+      const curLang = getCurrentSiteLang();
+      const langName = data.currentLanguage?.name || state.currentLang.toUpperCase();
+      statusLangText.textContent = `${langName}${data.currentLanguage?.isOriginal ? ` ${getTranslation('status.native_tag', curLang)}` : ''}`;
+      statusLangBadge.classList.remove('hidden');
+      statusLangBadge.classList.add('inline-flex');
+    }
+
+    updateLanguageDropdown();
+
+    // Status Badges
+    if (statusMethodBadge) {
+      const curLang = getCurrentSiteLang();
+      if (data.methodUsed === 'fallback') {
+        statusMethodBadge.textContent = getTranslation('status.method_fallback', curLang);
+        statusMethodBadge.className = 'px-2.5 sm:px-3 py-1 rounded-[6px] font-semibold text-xs sm:text-sm bg-purple-50 text-purple-700 border border-purple-200';
+      } else {
+        statusMethodBadge.textContent = getTranslation('status.method_cc', curLang);
+        statusMethodBadge.className = 'px-2.5 sm:px-3 py-1 rounded-[6px] font-semibold text-xs sm:text-sm bg-emerald-50 text-emerald-700 border border-emerald-200';
+      }
+    }
+
+    renderTranscriptList();
+    updateExportTimestampsUI();
+
+    // If site language is different from video's loaded language (e.g. site is in Portuguese, Italian, Spanish, German)
+    // automatically trigger translation to site language!
+    const activeSiteLang = getCurrentSiteLang();
+    if (activeSiteLang && activeSiteLang !== 'en' && state.currentLang !== activeSiteLang) {
+      setTimeout(() => {
+        if (langSelect && state.rawSegments.length > 0) {
+          langSelect.value = activeSiteLang;
+          langSelect.dispatchEvent(new Event('change'));
+        }
+      }, 200);
+    }
+  }
+
+  function renderTranscriptList() {
+    if (!transcriptContainer) return;
+    transcriptContainer.innerHTML = '';
+
+    const query = state.searchQuery.toLowerCase().trim();
+    let matchesCount = 0;
+
+    const filtered = state.segments.map((seg, idx) => {
+      const displayText = seg.text;
+      const matches = query ? displayText.toLowerCase().includes(query) : true;
+      if (query && matches) matchesCount++;
+      return { ...seg, displayText, matches, index: idx };
+    });
+
+    if (searchCount) {
+      if (query) {
+        const curLang = getCurrentSiteLang();
+        searchCount.textContent = `${matchesCount} ${getTranslation('search.found', curLang)}`;
+        searchCount.classList.remove('hidden');
+      } else {
+        searchCount.classList.add('hidden');
+      }
+    }
+
+    if (state.viewMode === 'paragraphs') {
+      // Continuous Script View: unbroken script without timestamps
+      transcriptContainer.classList.remove('divide-y', 'divide-[#f2f2f2]');
+
+      const container = document.createElement('div');
+      container.className = 'text-[#111111] text-sm sm:text-[18px] leading-relaxed sm:leading-8 select-text p-2 sm:p-4 transition-colors break-words';
+
+      if (filtered.length === 0) {
+        const curLang = getCurrentSiteLang();
+        const emptyMsg = document.createElement('p');
+        emptyMsg.className = 'text-sm sm:text-base text-[#6b7280] italic text-center py-8';
+        emptyMsg.textContent = query 
+          ? getTranslation('transcript.empty_search', curLang) 
+          : getTranslation('transcript.empty_content', curLang);
+        container.appendChild(emptyMsg);
+        transcriptContainer.appendChild(container);
+        return;
+      }
+
+      const p = document.createElement('p');
+      p.className = 'text-[#111111] text-sm sm:text-[18px] leading-relaxed sm:leading-8 select-text break-words';
+
+      filtered.forEach((seg) => {
+        const cleanText = (seg.displayText || seg.text || '')
+          .replace(/[\r\n]+/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        if (!cleanText) return;
+
+        const span = document.createElement('span');
+        span.className = 'hover:bg-blue-50 hover:text-[#0070f3] rounded px-0.5 transition-colors cursor-pointer';
+        span.setAttribute('data-start', seg.start.toString());
+        span.title = `Click to play from ${formatTime(seg.start)}`;
+        span.addEventListener('click', () => seekVideo(seg.start));
+
+        if (query && cleanText.toLowerCase().includes(query)) {
+          const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const parts = cleanText.split(new RegExp(`(${escaped})`, 'gi'));
+          parts.forEach((part: string) => {
+            if (part.toLowerCase() === query) {
+              const mark = document.createElement('mark');
+              mark.className = 'bg-yellow-200 text-black px-0.5 rounded font-medium';
+              mark.textContent = part;
+              span.appendChild(mark);
+            } else {
+              span.appendChild(document.createTextNode(part));
+            }
+          });
+        } else {
+          span.textContent = cleanText;
+        }
+
+        p.appendChild(span);
+        p.appendChild(document.createTextNode(' '));
+      });
+
+      container.appendChild(p);
+      transcriptContainer.appendChild(container);
+      return;
+    }
+
+    // Default Segment View
+    transcriptContainer.classList.add('divide-y', 'divide-[#f2f2f2]');
+
+    filtered.forEach((item) => {
+      if (query && !item.matches) return;
+
+      const row = document.createElement('div');
+      row.className = 'py-2.5 sm:py-3 px-2 sm:px-2.5 flex items-start gap-2.5 sm:gap-3.5 hover:bg-[#fafafa] rounded-md transition-colors group cursor-pointer';
+      row.setAttribute('data-start', item.start.toString());
+
+      const timeBtn = document.createElement('button');
+      timeBtn.type = 'button';
+      timeBtn.className = 'text-xs sm:text-sm font-mono font-semibold text-[#4b5563] group-hover:text-[#0070f3] bg-[#fafafa] group-hover:bg-[#0070f3]/10 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border border-[#ebebeb] group-hover:border-[#0070f3]/30 shrink-0 transition-colors mt-0.5 cursor-pointer';
+      timeBtn.textContent = formatTime(item.start);
+      timeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        seekVideo(item.start);
+      });
+
+      const textEl = document.createElement('p');
+      textEl.className = 'text-sm sm:text-[17px] text-[#111111] leading-relaxed sm:leading-7 flex-1 select-text break-words';
+
+      if (query && item.matches) {
+        const parts = item.displayText.split(new RegExp(`(${query})`, 'gi'));
+        parts.forEach((part: string) => {
+          if (part.toLowerCase() === query) {
+            const mark = document.createElement('mark');
+            mark.className = 'bg-yellow-200 text-black px-0.5 rounded';
+            mark.textContent = part;
+            textEl.appendChild(mark);
+          } else {
+            textEl.appendChild(document.createTextNode(part));
+          }
+        });
+      } else {
+        textEl.textContent = item.displayText;
+      }
+
+      row.appendChild(timeBtn);
+      row.appendChild(textEl);
+      row.addEventListener('click', () => seekVideo(item.start));
+      transcriptContainer.appendChild(row);
+    });
+  }
+
+  // Search input handler
+  searchInput?.addEventListener('input', (e) => {
+    state.searchQuery = (e.target as HTMLInputElement).value;
+    renderTranscriptList();
+  });
+
+  // View switchers
+  viewSegmentsBtn?.addEventListener('click', () => {
+    state.viewMode = 'segments';
+    state.includeTimestamps = true;
+    updateExportTimestampsUI();
+    viewSegmentsBtn.className = 'flex-1 sm:flex-initial px-3 py-1.5 rounded-[4px] text-xs sm:text-sm font-semibold bg-white text-[#111111] shadow-xs cursor-pointer';
+    viewParagraphsBtn?.setAttribute('class', 'flex-1 sm:flex-initial px-3 py-1.5 rounded-[4px] text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#111111] cursor-pointer');
+    renderTranscriptList();
+  });
+
+  viewParagraphsBtn?.addEventListener('click', () => {
+    state.viewMode = 'paragraphs';
+    state.includeTimestamps = false;
+    updateExportTimestampsUI();
+    viewParagraphsBtn.className = 'flex-1 sm:flex-initial px-3 py-1.5 rounded-[4px] text-xs sm:text-sm font-semibold bg-white text-[#111111] shadow-xs cursor-pointer';
+    viewSegmentsBtn?.setAttribute('class', 'flex-1 sm:flex-initial px-3 py-1.5 rounded-[4px] text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#111111] cursor-pointer');
+    renderTranscriptList();
+  });
+
+  // Timestamps toggle for downloads/exports
+  exportTimestampsToggle?.addEventListener('click', () => {
+    state.includeTimestamps = !state.includeTimestamps;
+    const curLang = getCurrentSiteLang();
+    updateExportTimestampsUI();
+    showToast(state.includeTimestamps ? getTranslation('toast.ts_enabled', curLang) : getTranslation('toast.ts_disabled', curLang));
+  });
+
+  // Helper to get processed segments
+  function getProcessedSegments() {
+    return state.segments;
+  }
+
+  // Export handlers
+  function downloadFile(content: string, filename: string, type: string) {
+    const curLang = getCurrentSiteLang();
+    const blob = new Blob([content], { type });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast(`${getTranslation('toast.exported', curLang)} ${filename}`);
+  }
+
+  document.getElementById('export-txt')?.addEventListener('click', () => {
+    const segments = getProcessedSegments();
+    let text = '';
+    if (state.includeTimestamps) {
+      text = segments.map(s => {
+        const clean = (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+        return `[${formatTime(s.start)}] ${clean}`;
+      }).join('\n');
+    } else {
+      text = segments
+        .map(s => (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim())
+        .filter(Boolean)
+        .join(' ');
+    }
+    downloadFile(text, `${state.videoMeta?.id || 'transcript'}.txt`, 'text/plain');
+  });
+
+  document.getElementById('export-srt')?.addEventListener('click', () => {
+    const segments = getProcessedSegments();
+    const srt = segments.map((s, idx) => {
+      const start = formatSrtTime(s.start);
+      const end = formatSrtTime(s.start + (s.duration || 2.5));
+      const clean = (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+      return `${idx + 1}\n${start} --> ${end}\n${clean}\n`;
+    }).join('\n');
+    downloadFile(srt, `${state.videoMeta?.id || 'transcript'}.srt`, 'text/plain');
+    if (!state.includeTimestamps) {
+      showToast('Exported .SRT (Subtitle files require timecodes by standard)');
+    }
+  });
+
+  document.getElementById('export-vtt')?.addEventListener('click', () => {
+    const segments = getProcessedSegments();
+    const vttBody = segments.map(s => {
+      const start = formatSrtTime(s.start).replace(',', '.');
+      const end = formatSrtTime(s.start + (s.duration || 2.5)).replace(',', '.');
+      const clean = (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+      return `${start} --> ${end}\n${clean}\n`;
+    }).join('\n');
+    downloadFile(`WEBVTT\n\n${vttBody}`, `${state.videoMeta?.id || 'transcript'}.vtt`, 'text/vtt');
+    if (!state.includeTimestamps) {
+      showToast('Exported .VTT (Subtitle files require timecodes by standard)');
+    }
+  });
+
+  document.getElementById('export-md')?.addEventListener('click', () => {
+    const segments = getProcessedSegments();
+    const mdLines = [
+      `# ${state.videoMeta?.title || 'YouTube Video Transcript'}`,
+      ``,
+      `- **Video URL**: ${state.videoMeta?.url || `https://www.youtube.com/watch?v=${state.videoId}`}`,
+      `- **Creator**: ${state.videoMeta?.author || 'YouTube Creator'}`,
+      `- **Language**: ${state.currentLang.toUpperCase()}`,
+      `- **Exported from**: [Extractyoutubescript](https://extractyoutubescript.com)`,
+      `- **Segments Count**: ${segments.length}`,
+      `- **Format**: ${state.includeTimestamps ? 'With Timestamps' : 'Continuous Script (No Timestamps)'}`,
+      ``,
+      `---`,
+      ``,
+      `## Full Transcript`,
+      ``
+    ];
+
+    if (state.includeTimestamps) {
+      segments.forEach(s => {
+        const clean = (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+        mdLines.push(`> **\`${formatTime(s.start)}\`** ${clean}`);
+        mdLines.push(``);
+      });
+    } else {
+      const continuous = segments
+        .map(s => (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim())
+        .filter(Boolean)
+        .join(' ');
+      mdLines.push(continuous);
+    }
+
+    downloadFile(mdLines.join('\n'), `${state.videoMeta?.id || 'transcript'}.md`, 'text/markdown');
+  });
+
+  document.getElementById('export-json')?.addEventListener('click', () => {
+    const segments = getProcessedSegments();
+    let jsonObj: any;
+    if (state.includeTimestamps) {
+      jsonObj = {
+        metadata: state.videoMeta,
+        generatedAt: new Date().toISOString(),
+        language: state.currentLang,
+        includeTimestamps: true,
+        totalSegments: segments.length,
+        segments: segments.map(s => ({
+          start: s.start,
+          duration: s.duration,
+          text: (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim()
+        }))
+      };
+    } else {
+      const continuous = segments
+        .map(s => (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim())
+        .filter(Boolean)
+        .join(' ');
+      jsonObj = {
+        metadata: state.videoMeta,
+        generatedAt: new Date().toISOString(),
+        language: state.currentLang,
+        includeTimestamps: false,
+        totalSegments: segments.length,
+        text: continuous,
+        segments: segments.map(s => ({
+          text: (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim()
+        }))
+      };
+    }
+    downloadFile(JSON.stringify(jsonObj, null, 2), `${state.videoMeta?.id || 'transcript'}.json`, 'application/json');
+  });
+
+  // Copy All button
+  document.getElementById('copy-all-btn')?.addEventListener('click', async () => {
+    const segments = getProcessedSegments();
+    let text = '';
+    if (state.includeTimestamps) {
+      text = segments.map(s => {
+        const clean = (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+        return `[${formatTime(s.start)}] ${clean}`;
+      }).join('\n');
+    } else {
+      text = segments
+        .map(s => (s.text || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim())
+        .filter(Boolean)
+        .join(' ');
+    }
+    await navigator.clipboard.writeText(text);
+    const curLang = getCurrentSiteLang();
+    showToast(state.includeTimestamps ? getTranslation('toast.copied_full_ts', curLang) : getTranslation('toast.copied_continuous', curLang));
+  });
+</script>

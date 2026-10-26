@@ -1,0 +1,67 @@
+---
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-[#ebebeb] bg-[#fafafa]/90 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+    <!-- Brand Wordmark -->
+    <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
+      <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#ff0000] flex items-center justify-center text-white text-xs font-bold tracking-tighter shadow-sm shadow-red-500/25 group-hover:scale-105 transition-transform shrink-0">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626 2.46 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+        </svg>
+      </div>
+      <div class="flex items-center gap-2 truncate">
+        <span class="text-base sm:text-xl font-bold tracking-tight text-[#111111] truncate" data-i18n="header.brand">Extractyoutubescript</span>
+      </div>
+    </a>
+
+    <!-- Language Selector Dropdown (Replaces NO SIGNUP REQUIRED) -->
+    <div class="flex items-center gap-2 shrink-0">
+      <div class="relative flex items-center group">
+        <label for="site-lang-select" class="sr-only" data-i18n="header.lang_label">Idioma</label>
+        <div class="pointer-events-none absolute left-2.5 sm:left-3 text-[#4b5563] flex items-center">
+          <svg class="w-4 h-4 text-[#111111]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+          </svg>
+        </div>
+        <select
+          id="site-lang-select"
+          aria-label="Alterar Idioma do Site"
+          class="appearance-none bg-white hover:bg-[#fafafa] border border-[#ebebeb] hover:border-[#111111]/30 text-[#111111] text-xs sm:text-sm font-semibold rounded-full pl-8 sm:pl-9 pr-7 sm:pr-8 py-1.5 sm:py-2 transition-all cursor-pointer shadow-xs focus:outline-none focus:ring-2 focus:ring-[#111111]/15 focus:border-[#111111]"
+        >
+          <option value="pt" selected>Português (Brasil)</option>
+          <option value="en">English (US)</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+        </select>
+        <div class="pointer-events-none absolute right-2.5 sm:right-3 text-[#6b7280] flex items-center">
+          <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { setSiteLanguage, getCurrentSiteLang, applySiteLanguage } from '../utils/i18n';
+
+  const select = document.getElementById('site-lang-select') as HTMLSelectElement | null;
+  if (select) {
+    const currentLang = getCurrentSiteLang();
+    select.value = currentLang;
+
+    // Apply language on initial page load if saved and different from default 'pt'
+    if (currentLang && currentLang !== 'pt') {
+      applySiteLanguage(currentLang);
+    }
+
+    select.addEventListener('change', (e) => {
+      const targetLang = (e.target as HTMLSelectElement).value;
+      setSiteLanguage(targetLang);
+    });
+  }
+</script>

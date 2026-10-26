@@ -1,11 +1,23 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from '../components/Header.astro';
+import TranscriptApp from '../components/TranscriptApp.astro';
+import SeoContent from '../components/SeoContent.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout 
+  title="Transcrever Vídeo YouTube — Converter em Texto Online Grátis com IA"
+  description="Aprenda como transcrever vídeo do YouTube em texto online grátis. Use nossa IA para transcrever vídeo do YouTube em segundos e baixe em TXT, SRT, VTT ou Markdown."
+  canonical="https://extractyoutubescript.com"
+  keywords="transcrever video youtube, transcrever vídeo youtube online grátis, transcrever video do youtube em texto, transcrever vídeo do youtube, transcrever video do youtube, como transcrever video do youtube em texto, ia para transcrever video do youtube"
+  ogImage="https://extractyoutubescript.com/og-image.png"
+  lang="pt-BR"
+>
+  <Header />
+  <main class="flex-1 w-full max-w-full overflow-x-hidden">
+    <TranscriptApp />
+    <SeoContent />
+  </main>
+  <Footer />
 </Layout>

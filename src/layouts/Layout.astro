@@ -1,23 +1,163 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  keywords?: string;
+  ogImage?: string;
+  lang?: string;
+}
+
+const {
+  title = "Transcrever Vídeo YouTube — Converter em Texto Online Grátis com IA",
+  description = "Aprenda como transcrever vídeo do YouTube em texto online grátis. Use nossa IA para transcrever vídeo do YouTube em segundos e baixe em TXT, SRT, VTT ou Markdown.",
+  canonical = "https://extractyoutubescript.com",
+  keywords = "transcrever video youtube, transcrever vídeo youtube online grátis, transcrever video do youtube em texto, transcrever vídeo do youtube, transcrever video do youtube, como transcrever video do youtube em texto, ia para transcrever video do youtube",
+  ogImage = "https://extractyoutubescript.com/og-image.png",
+  lang = "pt-BR"
+} = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${canonical}/#website`,
+      "url": canonical,
+      "name": "Extractyoutubescript",
+      "description": description,
+      "inLanguage": "pt-BR",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Extractyoutubescript",
+        "url": canonical,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${canonical}/favicon.svg`
+        }
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": `${canonical}/#webapp`,
+      "name": "Extractyoutubescript — Transcrever Vídeo YouTube em Texto",
+      "url": canonical,
+      "description": description,
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "inLanguage": "pt-BR",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Transcrever vídeo do YouTube em texto instantaneamente com legendas CC",
+        "IA para transcrever vídeo do YouTube sem legendas (áudio fallback)",
+        "Exportação multiformato em 1 clique: TXT, SRT, VTT, Markdown e JSON",
+        "Player interativo com timestamps sincronizados em tempo real",
+        "Filtro inteligente para cortar introduções, encerramentos e anúncios de patrocinadores",
+        "Tradução instantânea para mais de 30 idiomas"
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": `${canonical}/#howto`,
+      "name": "Como transcrever vídeo do YouTube em texto",
+      "description": "Aprenda o passo a passo fácil de como transcrever qualquer vídeo do YouTube em texto online grátis com nossa ferramenta e inteligência artificial.",
+      "totalTime": "PT30S",
+      "inLanguage": "pt-BR",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Copie o link do vídeo do YouTube",
+          "text": "Acesse o YouTube pelo navegador ou aplicativo e copie o link (URL) do vídeo que você deseja transcrever."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Cole o link e escolha o método",
+          "text": "Cole a URL no campo de busca do Extractyoutubescript. O modo Automático escolhe as legendas nativas ou ativa a IA de áudio fallback."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Extraia e baixe o texto",
+          "text": "Clique no botão 'Extrair Transcrição'. Visualize o texto completo sincronizado com os timestamps e exporte em TXT, SRT, VTT ou Markdown."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth w-full overflow-x-hidden">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonical} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Extractyoutubescript" />
+    
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Extractyoutubescript" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Transcrever Vídeo YouTube em Texto Online Grátis e IA" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Transcrever Vídeo YouTube em Texto Online Grátis e IA" />
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <!-- Early Language Initializer -->
+    <script is:inline>
+      (function() {
+        try {
+          var saved = localStorage.getItem('extractyt_site_lang');
+          if (saved) {
+            document.documentElement.lang = saved;
+          } else {
+            document.documentElement.lang = 'pt-BR';
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen w-full max-w-full overflow-x-hidden bg-[#fafafa] text-[#111111] text-base antialiased selection:bg-[#111111] selection:text-white flex flex-col font-sans">
+    <slot />
+  </body>
+</html>
