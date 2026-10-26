@@ -1,0 +1,319 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const canonicalUrl = "https://extractyoutubescript.com/about";
+const pageTitle = "Sobre Nós — Conheça o Extractyoutubescript e Nossa Missão";
+const pageDescription = "Conheça a história, missão e tecnologia do Extractyoutubescript. Nossa ferramenta online e gratuita converte vídeos do YouTube em texto estruturado em segundos.";
+
+const aboutStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": `${canonicalUrl}#webpage`,
+      "url": canonicalUrl,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://extractyoutubescript.com/#website",
+        "url": "https://extractyoutubescript.com",
+        "name": "Extractyoutubescript"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Início",
+            "item": "https://extractyoutubescript.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Sobre Nós",
+            "item": canonicalUrl
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://extractyoutubescript.com/#organization",
+      "name": "Extractyoutubescript",
+      "url": "https://extractyoutubescript.com",
+      "logo": "https://extractyoutubescript.com/favicon.svg",
+      "description": "Plataforma web gratuita e aberta especializada na transcrição, tradução e exportação estruturada de vídeos do YouTube.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "contato@extractyoutubescript.com",
+        "availableLanguage": ["Portuguese", "English", "Spanish"]
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalUrl}
+  keywords="sobre extractyoutubescript, quem somos, ferramenta transcrever youtube, sobre nós, transcrição de videos online, tecnologia transcrição youtube"
+  pageType="article"
+  structuredData={aboutStructuredData}
+>
+  <Header />
+
+  <main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" class="mb-8 flex items-center gap-2 text-xs sm:text-sm text-[#6b7280]">
+      <a href="/" class="hover:text-[#111111] transition-colors flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span>Início</span>
+      </a>
+      <span class="text-gray-400">/</span>
+      <span class="text-[#111111] font-semibold" aria-current="page">Sobre Nós</span>
+    </nav>
+
+    <!-- Page Header & Hero -->
+    <header class="space-y-4 mb-12 sm:mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm font-semibold">
+        <span class="w-2 h-2 rounded-full bg-red-600"></span>
+        <span>Conheça Nossa História & Propósito</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#111111] leading-tight">
+        Tornando o conhecimento em vídeo acessível, legível e pesquisável para todos
+      </h1>
+      <p class="text-base sm:text-xl text-[#4b5563] leading-relaxed max-w-3xl">
+        O Extractyoutubescript foi criado com uma missão clara: eliminar as barreiras do conteúdo audiovisual, transformando qualquer fala do YouTube em texto estruturado em segundos.
+      </p>
+    </header>
+
+    <!-- Key Metrics Grid -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14 sm:mb-18" aria-label="Destaques da Plataforma">
+      <div class="p-5 bg-white border border-[#ebebeb] rounded-2xl shadow-xs text-center space-y-1">
+        <div class="text-2xl sm:text-3xl font-extrabold text-[#111111]">100%</div>
+        <div class="text-xs sm:text-sm text-[#4b5563] font-medium">Gratuito & Ilimitado</div>
+      </div>
+      <div class="p-5 bg-white border border-[#ebebeb] rounded-2xl shadow-xs text-center space-y-1">
+        <div class="text-2xl sm:text-3xl font-extrabold text-[#111111]">30+</div>
+        <div class="text-xs sm:text-sm text-[#4b5563] font-medium">Idiomas Suportados</div>
+      </div>
+      <div class="p-5 bg-white border border-[#ebebeb] rounded-2xl shadow-xs text-center space-y-1">
+        <div class="text-2xl sm:text-3xl font-extrabold text-[#111111]">5</div>
+        <div class="text-xs sm:text-sm text-[#4b5563] font-medium">Formatos (TXT, SRT, MD...)</div>
+      </div>
+      <div class="p-5 bg-white border border-[#ebebeb] rounded-2xl shadow-xs text-center space-y-1">
+        <div class="text-2xl sm:text-3xl font-extrabold text-emerald-600">0s</div>
+        <div class="text-xs sm:text-sm text-[#4b5563] font-medium">Sem Cadastro Obrigatório</div>
+      </div>
+    </section>
+
+    <!-- Narrative Content Sections -->
+    <article class="space-y-12 sm:space-y-16 text-[#374151] leading-relaxed">
+      
+      <!-- Section 1: Por que criamos -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#111111] flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-red-100 text-red-700 flex items-center justify-center text-sm font-bold shrink-0">01</span>
+          A Origem e a Necessidade
+        </h2>
+        <div class="bg-white border border-[#ebebeb] rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs">
+          <p class="text-base sm:text-lg">
+            O YouTube se transformou no maior acervo de educação, ciência, jornalismo e aprendizado prático da história da humanidade. Todos os dias, milhões de horas de palestras universitárias, tutoriais avançados, entrevistas históricas e debates técnicos são compartilhados na plataforma.
+          </p>
+          <p class="text-base sm:text-lg">
+            No entanto, o formato de vídeo possui uma grande limitação: <strong>o conteúdo não é facilmente pesquisável, citável ou resumível</strong>. Pausar um vídeo de 2 horas a cada 10 segundos para anotar manualmente uma citação é um processo exaustivo e ineficiente.
+          </p>
+          <p class="text-base sm:text-lg">
+            Percebemos que estudantes perdiam noites transcrevendo aulas, jornalistas gastavam metade do dia decupando entrevistas e criadores de conteúdo sofriam para criar legendas acessíveis. Foi a partir dessa dor real que construímos o <strong>Extractyoutubescript</strong>.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 2: Nossa Tecnologia e Arquitetura -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#111111] flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-bold shrink-0">02</span>
+          Como Nossa Tecnologia Funciona
+        </h2>
+        <div class="bg-white border border-[#ebebeb] rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
+          <p class="text-base sm:text-lg">
+            Combinamos engenharia web de alta performance com algoritmos inteligentes para entregar transcrições limpas e prontas em fração de segundo:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+            <div class="p-5 rounded-xl bg-[#fafafa] border border-[#ebebeb] space-y-2">
+              <div class="font-bold text-[#111111] text-base flex items-center gap-2">
+                <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                Captura Nativa Instantânea
+              </div>
+              <p class="text-sm text-[#4b5563]">
+                Lemos as faixas oficiais de legendas (Closed Captions e auto-sync) disponibilizadas pelo criador no YouTube, garantindo fidelidade palavra por palavra sem atrasos.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl bg-[#fafafa] border border-[#ebebeb] space-y-2">
+              <div class="font-bold text-[#111111] text-base flex items-center gap-2">
+                <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                Inteligência Artificial de Áudio
+              </div>
+              <p class="text-sm text-[#4b5563]">
+                Quando um vídeo não possui legendas originais ativadas, nosso sistema ativa rotinas de fallback inteligente para processar a fala com máxima acurácia fonética.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl bg-[#fafafa] border border-[#ebebeb] space-y-2">
+              <div class="font-bold text-[#111111] text-base flex items-center gap-2">
+                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                </svg>
+                Tradução Global com Preservação de Tempo
+              </div>
+              <p class="text-sm text-[#4b5563]">
+                Traduza a transcrição inteira para mais de 30 línguas mantendo a correlação exata de cada segundo do vídeo para estudo internacional.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl bg-[#fafafa] border border-[#ebebeb] space-y-2">
+              <div class="font-bold text-[#111111] text-base flex items-center gap-2">
+                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Formatos Compatíveis com seu Workflow
+              </div>
+              <p class="text-sm text-[#4b5563]">
+                Exporte diretamente para SRT/VTT (editores de vídeo Premiere, DaVinci), Markdown (Obsidian, Notion, Logseq), TXT ou JSON estruturado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Nossos Compromissos e Valores -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#111111] flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold shrink-0">03</span>
+          Nossos Valores Fundamentais
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white border border-[#ebebeb] rounded-2xl p-6 space-y-3 shadow-xs">
+            <div class="w-10 h-10 rounded-xl bg-[#111111] text-white flex items-center justify-center font-bold">
+              1
+            </div>
+            <h3 class="text-lg font-bold text-[#111111]">Acesso Universal & Gratuito</h3>
+            <p class="text-sm text-[#4b5563]">
+              Acreditamos que o conhecimento deve ser livre. Nunca cobraremos por funcionalidades essenciais de transcrição nem exigiremos cartão de crédito.
+            </p>
+          </div>
+
+          <div class="bg-white border border-[#ebebeb] rounded-2xl p-6 space-y-3 shadow-xs">
+            <div class="w-10 h-10 rounded-xl bg-[#111111] text-white flex items-center justify-center font-bold">
+              2
+            </div>
+            <h3 class="text-lg font-bold text-[#111111]">Privacidade por Padrão</h3>
+            <p class="text-sm text-[#4b5563]">
+              Não vendemos dados, não criamos perfis invasivos de navegação e não exigimos senhas ou vinculação com contas pessoais do Google.
+            </p>
+          </div>
+
+          <div class="bg-white border border-[#ebebeb] rounded-2xl p-6 space-y-3 shadow-xs">
+            <div class="w-10 h-10 rounded-xl bg-[#111111] text-white flex items-center justify-center font-bold">
+              3
+            </div>
+            <h3 class="text-lg font-bold text-[#111111]">Desempenho & MPA Limpo</h3>
+            <p class="text-sm text-[#4b5563]">
+              Construído com arquitetura Multi-Page Application (MPA) em Astro, garantindo páginas que carregam instantaneamente e indexação total pelos buscadores.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Quem se beneficia -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#111111] flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-sm font-bold shrink-0">04</span>
+          Para Quem o Extractyoutubescript Foi Criado?
+        </h2>
+        <div class="bg-white border border-[#ebebeb] rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs">
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600 font-bold text-lg mt-0.5">✓</span>
+              <div>
+                <strong class="text-[#111111]">Estudantes, Pesquisadores e Universitários:</strong> Converta palestras acadêmicas, webinars e videoaulas em apostilas de revisão e resumos prontos para copiar e colar em teses e trabalhos.
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600 font-bold text-lg mt-0.5">✓</span>
+              <div>
+                <strong class="text-[#111111]">Criadores de Conteúdo e Roteiristas:</strong> Transforme episódios de podcasts e vídeos longos em artigos para blog, posts no LinkedIn, threads e roteiros para TikTok e Instagram Shorts.
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600 font-bold text-lg mt-0.5">✓</span>
+              <div>
+                <strong class="text-[#111111]">Jornalistas e Repórteres:</strong> Extraia declarações literais de coletivas de imprensa, discursos e entrevistas sem perder tempo com digitação manual e verificação auditiva exaustiva.
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600 font-bold text-lg mt-0.5">✓</span>
+              <div>
+                <strong class="text-[#111111]">Comunidade Surda e Pessoas com Dificuldade Auditiva:</strong> Garanta o direito de ler qualquer conteúdo com precisão textual completa e clara.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 5: Aviso de Não Afiliação -->
+      <section class="p-6 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 space-y-2 text-sm leading-relaxed">
+        <div class="font-bold flex items-center gap-2 text-base text-amber-950">
+          <svg class="w-5 h-5 text-amber-700 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+          </svg>
+          Transparência e Respeito aos Termos da Plataforma
+        </div>
+        <p>
+          O <strong>Extractyoutubescript</strong> é uma aplicação independente mantida para fins educacionais, de produtividade e acessibilidade. Não possuímos nenhum vínculo societário, patrocínio ou afiliação oficial com o YouTube, Google LLC ou Alphabet Inc. YouTube™ é marca registrada de Google LLC. Respeitamos integralmente os direitos autorais dos criadores de conteúdo e recomendamos o uso responsável e ético de todas as transcrições.
+        </p>
+      </section>
+
+      <!-- Call to Action Banner -->
+      <section class="bg-[#111111] text-white rounded-2xl p-8 sm:p-12 text-center space-y-5">
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+          Pronto para experimentar na prática?
+        </h2>
+        <p class="text-base text-gray-300 max-w-xl mx-auto">
+          Cole a URL de qualquer vídeo e obtenha a transcrição completa com timestamps sincronizados em menos de 5 segundos.
+        </p>
+        <div class="pt-2">
+          <a
+            href="/#app"
+            class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white text-[#111111] font-bold text-base hover:bg-gray-100 transition-colors shadow-sm"
+          >
+            <span>Ir para o Transcritor</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

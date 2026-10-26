@@ -1,21 +1,49 @@
 ---
+import BrandLogo from './BrandLogo.astro';
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const navItems = [
+  { href: '/', label: 'Início', i18nKey: 'header.nav_home', matchExact: true },
+  { href: '/about', label: 'Sobre Nós', i18nKey: 'header.nav_about' },
+  { href: '/contact', label: 'Contato', i18nKey: 'header.nav_contact' },
+  { href: '/privacy-policy', label: 'Privacidade', i18nKey: 'header.nav_privacy' },
+  { href: '/terms', label: 'Termos', i18nKey: 'header.nav_terms' }
+];
+
+const isActive = (item: { href: string; matchExact?: boolean }) => {
+  if (item.matchExact) return pathname === '/';
+  return pathname === item.href || pathname.startsWith(item.href + '/');
+};
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-[#ebebeb] bg-[#fafafa]/90 backdrop-blur-md">
   <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
     <!-- Brand Wordmark -->
-    <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
-      <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#ff0000] flex items-center justify-center text-white text-xs font-bold tracking-tighter shadow-sm shadow-red-500/25 group-hover:scale-105 transition-transform shrink-0">
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626 2.46 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-        </svg>
-      </div>
-      <div class="flex items-center gap-2 truncate">
-        <span class="text-base sm:text-xl font-bold tracking-tight text-[#111111] truncate" data-i18n="header.brand">Extractyoutubescript</span>
-      </div>
-    </a>
+    <BrandLogo size="md" />
 
-    <!-- Language Selector Dropdown (Replaces NO SIGNUP REQUIRED) -->
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden md:flex items-center gap-1 lg:gap-1.5" aria-label="Navegação Principal">
+      {navItems.map((item) => {
+        const active = isActive(item);
+        return (
+          <a
+            href={item.href}
+            class={`px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors ${
+              active
+                ? 'bg-[#111111]/5 text-[#111111] font-semibold'
+                : 'text-[#4b5563] hover:text-[#111111] hover:bg-[#111111]/5 font-medium'
+            }`}
+            aria-current={active ? 'page' : undefined}
+            data-i18n={item.i18nKey}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Right Controls: Language Selector Dropdown & Mobile Toggle -->
     <div class="flex items-center gap-2 shrink-0">
       <div class="relative flex items-center group">
         <label for="site-lang-select" class="sr-only" data-i18n="header.lang_label">Idioma</label>
@@ -42,13 +70,52 @@
           </svg>
         </div>
       </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="md:hidden p-2 rounded-lg text-[#374151] hover:text-[#111111] hover:bg-[#111111]/5 focus:outline-none focus:ring-2 focus:ring-[#111111]/20"
+        aria-label="Abrir Menu de Navegação"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <svg id="menu-icon-bars" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation -->
+  <div id="mobile-nav" class="hidden md:hidden border-t border-[#ebebeb] bg-[#fafafa]/95 backdrop-blur-md px-4 py-3 space-y-1">
+    {navItems.map((item) => {
+      const active = isActive(item);
+      return (
+        <a
+          href={item.href}
+          class={`flex items-center min-h-[44px] px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+            active
+              ? 'bg-[#111111]/5 text-[#111111] font-semibold'
+              : 'text-[#4b5563] hover:text-[#111111] hover:bg-[#111111]/5'
+          }`}
+          aria-current={active ? 'page' : undefined}
+          data-i18n={item.i18nKey}
+        >
+          {item.label}
+        </a>
+      );
+    })}
   </div>
 </header>
 
 <script>
   import { setSiteLanguage, getCurrentSiteLang, applySiteLanguage } from '../utils/i18n';
 
+  // Language Dropdown
   const select = document.getElementById('site-lang-select') as HTMLSelectElement | null;
   if (select) {
     const currentLang = getCurrentSiteLang();
@@ -62,6 +129,29 @@
     select.addEventListener('change', (e) => {
       const targetLang = (e.target as HTMLSelectElement).value;
       setSiteLanguage(targetLang);
+    });
+  }
+
+  // Mobile Menu Toggle
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  const iconBars = document.getElementById('menu-icon-bars');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  if (toggleBtn && mobileNav) {
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = !mobileNav.classList.contains('hidden');
+      if (isOpen) {
+        mobileNav.classList.add('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        iconBars?.classList.remove('hidden');
+        iconClose?.classList.add('hidden');
+      } else {
+        mobileNav.classList.remove('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        iconBars?.classList.add('hidden');
+        iconClose?.classList.remove('hidden');
+      }
     });
   }
 </script>

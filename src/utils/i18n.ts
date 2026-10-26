@@ -51,6 +51,102 @@ export const translations: Record<string, Record<string, string>> = {
     de: 'Sprache',
     fr: 'Langue'
   },
+  'header.nav_home': {
+    en: 'Home',
+    pt: 'Início',
+    it: 'Inizio',
+    es: 'Inicio',
+    de: 'Start',
+    fr: 'Accueil'
+  },
+  'header.nav_about': {
+    en: 'About Us',
+    pt: 'Sobre Nós',
+    it: 'Chi Siamo',
+    es: 'Sobre Nosotros',
+    de: 'Über Uns',
+    fr: 'À Propos'
+  },
+  'header.nav_contact': {
+    en: 'Contact',
+    pt: 'Contato',
+    it: 'Contatti',
+    es: 'Contacto',
+    de: 'Kontakt',
+    fr: 'Contact'
+  },
+  'header.nav_privacy': {
+    en: 'Privacy Policy',
+    pt: 'Privacidade',
+    it: 'Privacy',
+    es: 'Privacidad',
+    de: 'Datenschutz',
+    fr: 'Confidentialité'
+  },
+  'header.nav_terms': {
+    en: 'Terms',
+    pt: 'Termos',
+    it: 'Termini',
+    es: 'Términos',
+    de: 'AGB',
+    fr: 'Conditions'
+  },
+  'footer.company_title': {
+    en: 'Company',
+    pt: 'Institucional',
+    it: 'Azienda',
+    es: 'Compañía',
+    de: 'Unternehmen',
+    fr: 'Entreprise'
+  },
+  'footer.legal_title': {
+    en: 'Legal & Policies',
+    pt: 'Legal & Privacidade',
+    it: 'Note Legali',
+    es: 'Legal y Privacidad',
+    de: 'Rechtliches',
+    fr: 'Mentions Légales'
+  },
+  'footer.about': {
+    en: 'About Extractyoutubescript',
+    pt: 'Sobre Nós',
+    it: 'Chi Siamo',
+    es: 'Sobre Nosotros',
+    de: 'Über Uns',
+    fr: 'À Propos de Nous'
+  },
+  'footer.contact': {
+    en: 'Contact Us',
+    pt: 'Fale Conosco',
+    it: 'Contattaci',
+    es: 'Contáctanos',
+    de: 'Kontakt',
+    fr: 'Nous Contacter'
+  },
+  'footer.privacy': {
+    en: 'Privacy Policy',
+    pt: 'Política de Privacidade',
+    it: 'Informativa sulla Privacy',
+    es: 'Política de Privacidad',
+    de: 'Datenschutzerklärung',
+    fr: 'Politique de Confidentialité'
+  },
+  'footer.terms': {
+    en: 'Terms & Conditions',
+    pt: 'Termos e Condições',
+    it: 'Termini e Condizioni',
+    es: 'Términos y Condiciones',
+    de: 'Nutzungsbedingungen',
+    fr: 'Conditions Générales'
+  },
+  'footer.disclaimer': {
+    en: 'YouTube Disclaimer',
+    pt: 'Aviso YouTube LLC',
+    it: 'Disclaimer YouTube',
+    es: 'Aviso Legal YouTube',
+    de: 'YouTube-Hinweis',
+    fr: 'Mentions YouTube'
+  },
 
   // Hero
   'hero.title': {

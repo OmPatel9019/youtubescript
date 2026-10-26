@@ -1,0 +1,345 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const canonicalUrl = "https://extractyoutubescript.com/contact";
+const pageTitle = "Fale Conosco — Contato e Suporte Extractyoutubescript";
+const pageDescription = "Entre em contato com a equipe do Extractyoutubescript. Obtenha suporte para transcrição de vídeos, reporte problemas, envie sugestões de recursos ou parcerias.";
+
+const topic = Astro.url.searchParams.get('topic') || '';
+
+const contactStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": `${canonicalUrl}#webpage`,
+      "url": canonicalUrl,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://extractyoutubescript.com/#website",
+        "url": "https://extractyoutubescript.com",
+        "name": "Extractyoutubescript"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Início",
+            "item": "https://extractyoutubescript.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Contato",
+            "item": canonicalUrl
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://extractyoutubescript.com/#organization",
+      "name": "Extractyoutubescript",
+      "url": "https://extractyoutubescript.com",
+      "logo": "https://extractyoutubescript.com/favicon.svg",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "Customer Support",
+          "url": canonicalUrl,
+          "availableLanguage": ["Portuguese", "English", "Spanish"]
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalUrl}
+  keywords="contato extractyoutubescript, suporte transcrever youtube, ajuda legendas youtube, feedback"
+  pageType="website"
+  structuredData={contactStructuredData}
+>
+  <Header />
+
+  <main class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" class="mb-8 flex items-center gap-2 text-xs sm:text-sm text-[#6b7280]">
+      <a href="/" class="hover:text-[#111111] transition-colors flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span>Início</span>
+      </a>
+      <span class="text-gray-400">/</span>
+      <span class="text-[#111111] font-semibold" aria-current="page">Fale Conosco</span>
+    </nav>
+
+    <!-- Header Hero -->
+    <header class="space-y-4 mb-12 sm:mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs sm:text-sm font-semibold">
+        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        <span>Suporte & Atendimento</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#111111] leading-tight">
+        Como podemos ajudar você hoje?
+      </h1>
+      <p class="text-base sm:text-xl text-[#4b5563] leading-relaxed max-w-3xl">
+        Tem dúvidas sobre como extrair uma transcrição, deseja sugerir uma nova funcionalidade ou encontrou um vídeo que não carregou legendas? Envie sua mensagem abaixo.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      
+      <!-- Contact Form Column (Left - 7 cols) -->
+      <div class="lg:col-span-7 bg-white border border-[#ebebeb] rounded-3xl p-6 sm:p-10 shadow-xs space-y-6">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#111111]">Envie uma Mensagem Direta</h2>
+          <p class="text-xs sm:text-sm text-[#6b7280] mt-1">Preencha os campos abaixo. Nossa equipe responde em até 24 a 48 horas úteis.</p>
+        </div>
+
+        <!-- Success Alert Message -->
+        <div id="contact-success" class="hidden p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm space-y-1">
+          <div class="font-bold flex items-center gap-2">
+            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Mensagem enviada com sucesso!
+          </div>
+          <p class="text-emerald-700 text-xs sm:text-sm pl-7" id="contact-success-msg">
+            Recebemos seu contato e retornaremos o mais breve possível.
+          </p>
+        </div>
+
+        <!-- Error Alert Message -->
+        <div id="contact-error" class="hidden p-4 rounded-2xl bg-red-50 border border-red-200 text-red-800 text-sm space-y-1">
+          <div class="font-bold flex items-center gap-2">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Erro ao enviar mensagem
+          </div>
+          <p class="text-red-700 text-xs sm:text-sm pl-7" id="contact-error-msg">
+            Verifique as informações preenchidas e tente novamente.
+          </p>
+        </div>
+
+        <form id="contact-form" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Name Field -->
+            <div class="space-y-1.5">
+              <label for="contact-name" class="block text-xs sm:text-sm font-semibold text-[#111111]">
+                Seu Nome <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                required
+                placeholder="Ex: Carlos Silva"
+                class="w-full px-4 py-3 rounded-xl bg-[#fafafa] border border-[#ebebeb] text-[#111111] placeholder:text-[#9ca3af] text-sm focus:outline-none focus:ring-2 focus:ring-[#111111]/15 focus:border-[#111111] transition-all"
+              />
+            </div>
+
+            <!-- Email Field -->
+            <div class="space-y-1.5">
+              <label for="contact-email" class="block text-xs sm:text-sm font-semibold text-[#111111]">
+                Seu E-mail <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                required
+                placeholder="carlos@exemplo.com"
+                class="w-full px-4 py-3 rounded-xl bg-[#fafafa] border border-[#ebebeb] text-[#111111] placeholder:text-[#9ca3af] text-sm focus:outline-none focus:ring-2 focus:ring-[#111111]/15 focus:border-[#111111] transition-all"
+              />
+            </div>
+          </div>
+
+          <!-- Category Field -->
+          <div class="space-y-1.5">
+            <label for="contact-category" class="block text-xs sm:text-sm font-semibold text-[#111111]">
+              Assunto Principal
+            </label>
+            <select
+              id="contact-category"
+              name="category"
+              class="w-full px-4 py-3 rounded-xl bg-[#fafafa] border border-[#ebebeb] text-[#111111] text-sm focus:outline-none focus:ring-2 focus:ring-[#111111]/15 focus:border-[#111111] transition-all cursor-pointer"
+            >
+              <option value="Dúvida Geral" selected={!topic}>Dúvida Geral sobre Transcrição</option>
+              <option value="Suporte Técnico" selected={topic === 'support'}>Suporte Técnico / Erro no Vídeo</option>
+              <option value="Sugestão de Recurso" selected={topic === 'feature'}>Sugestão de Nova Funcionalidade ou Formato</option>
+              <option value="Parceria e Imprensa">Parceria Comercial ou Contato de Imprensa</option>
+              <option value="Privacidade e Dados">Dúvida sobre Privacidade (LGPD / GDPR)</option>
+            </select>
+          </div>
+
+          <!-- Video URL (Optional helper) -->
+          <div class="space-y-1.5">
+            <label for="contact-video" class="block text-xs sm:text-sm font-semibold text-[#111111]">
+              Link do Vídeo do YouTube <span class="text-xs font-normal text-[#6b7280]">(Opcional, caso queira reportar erro em vídeo)</span>
+            </label>
+            <input
+              type="url"
+              id="contact-video"
+              name="videoUrl"
+              placeholder="https://www.youtube.com/watch?v=..."
+              class="w-full px-4 py-3 rounded-xl bg-[#fafafa] border border-[#ebebeb] text-[#111111] placeholder:text-[#9ca3af] text-sm focus:outline-none focus:ring-2 focus:ring-[#111111]/15 focus:border-[#111111] transition-all"
+            />
+          </div>
+
+          <!-- Message Field -->
+          <div class="space-y-1.5">
+            <label for="contact-message" class="block text-xs sm:text-sm font-semibold text-[#111111]">
+              Mensagem <span class="text-red-500">*</span>
+            </label>
+            <textarea
+              id="contact-message"
+              name="message"
+              required
+              rows="5"
+              placeholder="Descreva detalhadamente sua dúvida, sugestão ou relato de bug..."
+              class="w-full px-4 py-3 rounded-xl bg-[#fafafa] border border-[#ebebeb] text-[#111111] placeholder:text-[#9ca3af] text-sm focus:outline-none focus:ring-2 focus:ring-[#111111]/15 focus:border-[#111111] transition-all resize-y"
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            id="contact-submit-btn"
+            class="w-full min-h-[48px] py-3.5 px-6 rounded-xl bg-[#111111] hover:bg-[#262626] text-white font-bold text-sm sm:text-base transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span id="btn-text">Enviar Mensagem</span>
+            <svg id="btn-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+            <svg id="btn-spinner" class="w-5 h-5 animate-spin hidden text-white" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Quick Help & FAQs (Right - 5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Quick Help / Self-Service Tips -->
+        <div class="bg-white border border-[#ebebeb] rounded-3xl p-6 sm:p-8 shadow-xs space-y-4">
+          <h2 class="text-base sm:text-lg font-bold text-[#111111]">Dúvidas Rápidas Frequentes</h2>
+          
+          <div class="space-y-3 text-xs sm:text-sm text-[#4b5563]">
+            <div class="p-3 bg-[#fafafa] rounded-xl border border-[#ebebeb] space-y-1">
+              <div class="font-bold text-[#111111]">O vídeo deu erro ao transcrever?</div>
+              <p>Verifique se o vídeo não é privado, não possui restrição de idade (18+) ou se é uma transmissão ao vivo em andamento. O sistema transcreve vídeos públicos já finalizados.</p>
+            </div>
+
+            <div class="p-3 bg-[#fafafa] rounded-xl border border-[#ebebeb] space-y-1">
+              <div class="font-bold text-[#111111]">Posso pedir novos formatos de exportação?</div>
+              <p>Sim! Atualmente suportamos TXT, SRT, VTT, Markdown e JSON. Se você utiliza outro software, envie sua sugestão no formulário.</p>
+            </div>
+
+            <div class="p-3 bg-[#fafafa] rounded-xl border border-[#ebebeb] space-y-1">
+              <div class="font-bold text-[#111111]">O serviço é realmente gratuito?</div>
+              <p>Sim, 100% gratuito e sem necessidade de cadastro para sempre.</p>
+            </div>
+
+            <div class="p-3 bg-[#fafafa] rounded-xl border border-[#ebebeb] space-y-1">
+              <div class="font-bold text-[#111111]">Qual o prazo médio de retorno?</div>
+              <p>Nossa equipe revisa todas as mensagens enviadas através do formulário e responde em até 24 a 48 horas úteis.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('contact-submit-btn') as HTMLButtonElement | null;
+  const btnText = document.getElementById('btn-text');
+  const btnIcon = document.getElementById('btn-icon');
+  const btnSpinner = document.getElementById('btn-spinner');
+  const successBox = document.getElementById('contact-success');
+  const successMsg = document.getElementById('contact-success-msg');
+  const errorBox = document.getElementById('contact-error');
+  const errorMsg = document.getElementById('contact-error-msg');
+
+  if (contactForm && submitBtn) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Reset feedback states
+      successBox?.classList.add('hidden');
+      errorBox?.classList.add('hidden');
+
+      // Set Loading
+      submitBtn.disabled = true;
+      btnText ? (btnText.textContent = 'Enviando Mensagem...') : null;
+      btnIcon?.classList.add('hidden');
+      btnSpinner?.classList.remove('hidden');
+
+      const formData = new FormData(contactForm);
+      const payload = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        category: formData.get('category'),
+        videoUrl: formData.get('videoUrl'),
+        message: formData.get('message')
+      };
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          if (successBox && successMsg) {
+            successMsg.textContent = data.message || 'Mensagem enviada com sucesso!';
+            successBox.classList.remove('hidden');
+          }
+          contactForm.reset();
+        } else {
+          if (errorBox && errorMsg) {
+            errorMsg.textContent = data.error || 'Erro ao enviar. Por favor, tente novamente.';
+            errorBox.classList.remove('hidden');
+          }
+        }
+      } catch (err) {
+        if (errorBox && errorMsg) {
+          errorMsg.textContent = 'Falha de conexão com o servidor. Tente novamente em instantes.';
+          errorBox.classList.remove('hidden');
+        }
+      } finally {
+        submitBtn.disabled = false;
+        btnText ? (btnText.textContent = 'Enviar Mensagem') : null;
+        btnIcon?.classList.remove('hidden');
+        btnSpinner?.classList.add('hidden');
+      }
+    });
+  }
+</script>

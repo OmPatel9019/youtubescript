@@ -8,6 +8,9 @@ interface Props {
   keywords?: string;
   ogImage?: string;
   lang?: string;
+  pageType?: string;
+  noindex?: boolean;
+  structuredData?: Record<string, any>;
 }
 
 const {
@@ -16,10 +19,13 @@ const {
   canonical = "https://extractyoutubescript.com",
   keywords = "transcrever video youtube, transcrever vídeo youtube online grátis, transcrever video do youtube em texto, transcrever vídeo do youtube, transcrever video do youtube, como transcrever video do youtube em texto, ia para transcrever video do youtube",
   ogImage = "https://extractyoutubescript.com/og-image.png",
-  lang = "pt-BR"
+  lang = "pt-BR",
+  pageType = "website",
+  noindex = false,
+  structuredData: customStructuredData
 } = Astro.props;
 
-const structuredData = {
+const defaultStructuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -32,10 +38,10 @@ const structuredData = {
       "publisher": {
         "@type": "Organization",
         "name": "Extractyoutubescript",
-        "url": canonical,
+        "url": "https://extractyoutubescript.com",
         "logo": {
           "@type": "ImageObject",
-          "url": `${canonical}/favicon.svg`
+          "url": "https://extractyoutubescript.com/favicon.svg"
         }
       }
     },
@@ -93,6 +99,8 @@ const structuredData = {
     }
   ]
 };
+
+const finalStructuredData = customStructuredData || defaultStructuredData;
 ---
 
 <!doctype html>
@@ -102,17 +110,30 @@ const structuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#FF1A44" />
     <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-6M4QXFHDP5"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6M4QXFHDP5');
+    </script>
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
     <meta name="author" content="Extractyoutubescript" />
     
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Extractyoutubescript" />
     <meta property="og:title" content={title} />
@@ -125,7 +146,7 @@ const structuredData = {
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Transcrever Vídeo YouTube em Texto Online Grátis e IA" />
+    <meta property="og:image:alt" content={title} />
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -133,7 +154,7 @@ const structuredData = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:image:alt" content="Transcrever Vídeo YouTube em Texto Online Grátis e IA" />
+    <meta name="twitter:image:alt" content={title} />
 
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -141,7 +162,7 @@ const structuredData = {
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet" />
 
     <!-- Structured Data JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)} />
 
     <!-- Early Language Initializer -->
     <script is:inline>

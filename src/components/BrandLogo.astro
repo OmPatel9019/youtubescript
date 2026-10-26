@@ -1,0 +1,129 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg' | 'xl' | number;
+  showText?: boolean;
+  class?: string;
+  textClass?: string;
+  href?: string;
+  linkable?: boolean;
+}
+
+const {
+  size = 'md',
+  showText = true,
+  class: className = '',
+  textClass = '',
+  href = '/',
+  linkable = true,
+} = Astro.props;
+
+// Determine dimensions based on size prop
+let iconClass = 'w-8 h-8';
+let textSize = 'text-base sm:text-xl';
+
+if (size === 'sm') {
+  iconClass = 'w-6 h-6';
+  textSize = 'text-sm sm:text-base';
+} else if (size === 'md') {
+  iconClass = 'w-8 h-8 sm:w-8 sm:h-8';
+  textSize = 'text-base sm:text-xl';
+} else if (size === 'lg') {
+  iconClass = 'w-10 h-10';
+  textSize = 'text-lg sm:text-2xl';
+} else if (size === 'xl') {
+  iconClass = 'w-12 h-12';
+  textSize = 'text-xl sm:text-3xl';
+} else if (typeof size === 'number') {
+  iconClass = `w-[${size}px] h-[${size}px]`;
+}
+---
+
+{
+  linkable ? (
+    <a
+      href={href}
+      class={`inline-flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0 transition-opacity hover:opacity-95 ${className}`}
+      aria-label="Extractyoutubescript - Início"
+    >
+      <div class={`${iconClass} relative rounded-xl shrink-0 shadow-sm shadow-red-500/20 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-red-500/30 transition-all duration-200 flex items-center justify-center`}>
+        <svg
+          class="w-full h-full drop-shadow-xs"
+          viewBox="0 0 64 64"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="brandLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FF1A44" />
+              <stop offset="50%" stop-color="#EE002D" />
+              <stop offset="100%" stop-color="#C50022" />
+            </linearGradient>
+            <linearGradient id="brandRimGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.03" />
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="62" height="62" rx="16" fill="url(#brandLogoGrad)" />
+          <rect x="1.5" y="1.5" width="61" height="61" rx="15.5" fill="none" stroke="url(#brandRimGlow)" stroke-width="1.2" />
+          <path d="M 15 19.5 C 15 17.6 17.1 16.4 18.7 17.4 L 30.8 25.4 C 32.3 26.4 32.3 28.6 30.8 29.6 L 18.7 37.6 C 17.1 38.6 15 37.4 15 35.5 Z" fill="#FFFFFF" />
+          <rect x="35" y="19" width="14" height="5" rx="2.5" fill="#FFFFFF" />
+          <rect x="35" y="28.5" width="17" height="5" rx="2.5" fill="#FFFFFF" />
+          <rect x="35" y="38" width="11" height="5" rx="2.5" fill="#FFFFFF" />
+        </svg>
+      </div>
+
+      {showText && (
+        <div class="flex items-center gap-2 truncate">
+          <span
+            class={`${textSize} font-extrabold tracking-tight text-[#111111] truncate ${textClass}`}
+            data-i18n="header.brand"
+          >
+            Extractyoutubescript
+          </span>
+        </div>
+      )}
+    </a>
+  ) : (
+    <div class={`inline-flex items-center gap-2.5 sm:gap-3 shrink-0 min-w-0 ${className}`}>
+      <div class={`${iconClass} relative rounded-xl shrink-0 shadow-sm shadow-red-500/20 flex items-center justify-center`}>
+        <svg
+          class="w-full h-full drop-shadow-xs"
+          viewBox="0 0 64 64"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="brandLogoGradStatic" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FF1A44" />
+              <stop offset="50%" stop-color="#EE002D" />
+              <stop offset="100%" stop-color="#C50022" />
+            </linearGradient>
+            <linearGradient id="brandRimGlowStatic" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.03" />
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="62" height="62" rx="16" fill="url(#brandLogoGradStatic)" />
+          <rect x="1.5" y="1.5" width="61" height="61" rx="15.5" fill="none" stroke="url(#brandRimGlowStatic)" stroke-width="1.2" />
+          <path d="M 15 19.5 C 15 17.6 17.1 16.4 18.7 17.4 L 30.8 25.4 C 32.3 26.4 32.3 28.6 30.8 29.6 L 18.7 37.6 C 17.1 38.6 15 37.4 15 35.5 Z" fill="#FFFFFF" />
+          <rect x="35" y="19" width="14" height="5" rx="2.5" fill="#FFFFFF" />
+          <rect x="35" y="28.5" width="17" height="5" rx="2.5" fill="#FFFFFF" />
+          <rect x="35" y="38" width="11" height="5" rx="2.5" fill="#FFFFFF" />
+        </svg>
+      </div>
+
+      {showText && (
+        <div class="flex items-center gap-2 truncate">
+          <span
+            class={`${textSize} font-extrabold tracking-tight text-[#111111] truncate ${textClass}`}
+            data-i18n="header.brand"
+          >
+            Extractyoutubescript
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}

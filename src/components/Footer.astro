@@ -1,53 +1,80 @@
 ---
+import BrandLogo from './BrandLogo.astro';
 ---
 
-<footer class="mt-auto border-t border-[#ebebeb] bg-[#fafafa] py-8 sm:py-12 px-3.5 sm:px-6 lg:px-8">
+<footer class="mt-auto border-t border-[#ebebeb] bg-[#fafafa] py-10 sm:py-14 px-3.5 sm:px-6 lg:px-8">
   <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8 sm:mb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
       <!-- Col 1: Wordmark & Statement -->
-      <div class="space-y-3.5 sm:col-span-2 md:col-span-1">
-        <a href="/" class="flex items-center gap-2.5">
-          <div class="w-6 h-6 rounded bg-[#ff0000] flex items-center justify-center text-white text-xs font-bold shadow-xs shrink-0">
-            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626 2.46 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-            </svg>
-          </div>
-          <span class="text-base sm:text-lg font-bold tracking-tight text-[#111111]" data-i18n="header.brand">Extractyoutubescript</span>
-        </a>
-        <p class="text-sm sm:text-base text-[#4b5563] leading-relaxed" data-i18n="footer.tagline">
+      <div class="space-y-3.5 sm:col-span-2 lg:col-span-1">
+        <BrandLogo size="sm" textClass="text-base sm:text-lg" />
+        <p class="text-sm text-[#4b5563] leading-relaxed" data-i18n="footer.tagline">
           Ferramenta online gratuita e IA para transcrever vídeo do YouTube em texto com legendas automáticas, áudio fallback e exportação em múltiplos formatos.
         </p>
-        <div class="flex items-center gap-2 pt-1 text-xs font-medium text-[#666666]">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-          <span>extractyoutubescript.com</span>
+        <div class="flex flex-col gap-1.5 pt-1 text-xs text-[#666666]">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+            <span class="font-medium">100% Gratuito & Sem Cadastro</span>
+          </div>
+          <div class="text-[#6b7280]">
+            extractyoutubescript.com
+          </div>
         </div>
       </div>
 
-      <!-- Col 2: Methods & Navegação -->
+      <!-- Col 2: Guia & Recursos -->
       <div class="space-y-3">
         <p class="text-xs sm:text-sm font-bold text-[#111111] uppercase tracking-wider" data-i18n="footer.methods_title">
-          Guia & Recursos
+          Guia & Ferramenta
         </p>
-        <ul class="space-y-2 text-sm sm:text-base text-[#374151]">
-          <li><a href="#app" class="hover:text-[#111111] transition-colors" data-i18n="footer.m1">Transcrever Vídeo Agora</a></li>
-          <li><a href="#sobre" class="hover:text-[#111111] transition-colors">Como Transcrever Passo a Passo</a></li>
-          <li><a href="#sobre" class="hover:text-[#111111] transition-colors">IA para Vídeos Sem Legendas</a></li>
-          <li><a href="#sobre" class="hover:text-[#111111] transition-colors">Perguntas Frequentes (FAQ)</a></li>
+        <ul class="space-y-2 text-sm text-[#374151]">
+          <li><a href="/#app" class="hover:text-[#111111] transition-colors" data-i18n="footer.m1">Transcrever Vídeo Agora</a></li>
+          <li><a href="/#sobre" class="hover:text-[#111111] transition-colors">Como Transcrever Passo a Passo</a></li>
+          <li><a href="/#sobre" class="hover:text-[#111111] transition-colors">IA para Vídeos Sem Legendas</a></li>
+          <li><a href="/#faq" class="hover:text-[#111111] transition-colors">Perguntas Frequentes (FAQ)</a></li>
         </ul>
       </div>
 
-      <!-- Col 3: Export Formats -->
+      <!-- Col 3: Institucional -->
       <div class="space-y-3">
-        <p class="text-xs sm:text-sm font-bold text-[#111111] uppercase tracking-wider" data-i18n="footer.exports_title">
-          Export Formats
+        <p class="text-xs sm:text-sm font-bold text-[#111111] uppercase tracking-wider" data-i18n="footer.company_title">
+          Institucional
         </p>
-        <ul class="space-y-2 text-sm sm:text-base text-[#374151]">
-          <li><a href="#app" class="hover:text-[#111111] transition-colors" data-i18n="footer.e1">SubRip Subtitles (.SRT)</a></li>
-          <li><a href="#app" class="hover:text-[#111111] transition-colors" data-i18n="footer.e2">WebVTT Subtitles (.VTT)</a></li>
-          <li><a href="#app" class="hover:text-[#111111] transition-colors" data-i18n="footer.e3">Notion / Obsidian Markdown (.MD)</a></li>
-          <li><a href="#app" class="hover:text-[#111111] transition-colors" data-i18n="footer.e4">Plain Text with Timestamps (.TXT)</a></li>
-          <li><a href="#app" class="hover:text-[#111111] transition-colors" data-i18n="footer.e5">Structured JSON (.JSON)</a></li>
+        <ul class="space-y-2 text-sm text-[#374151]">
+          <li><a href="/about" class="hover:text-[#111111] transition-colors" data-i18n="footer.about">Sobre Nós</a></li>
+          <li><a href="/contact" class="hover:text-[#111111] transition-colors" data-i18n="footer.contact">Fale Conosco</a></li>
+          <li><a href="/contact?topic=support" class="hover:text-[#111111] transition-colors">Suporte Técnico</a></li>
+          <li><a href="/contact?topic=feature" class="hover:text-[#111111] transition-colors">Sugerir Funcionalidade</a></li>
         </ul>
+      </div>
+
+      <!-- Col 4: Legal & Políticas -->
+      <div class="space-y-3">
+        <p class="text-xs sm:text-sm font-bold text-[#111111] uppercase tracking-wider" data-i18n="footer.legal_title">
+          Legal & Privacidade
+        </p>
+        <ul class="space-y-2 text-sm text-[#374151]">
+          <li><a href="/privacy-policy" class="hover:text-[#111111] transition-colors" data-i18n="footer.privacy">Política de Privacidade</a></li>
+          <li><a href="/terms" class="hover:text-[#111111] transition-colors" data-i18n="footer.terms">Termos e Condições</a></li>
+          <li><a href="/terms#disclaimer" class="hover:text-[#111111] transition-colors" data-i18n="footer.disclaimer">Aviso YouTube™</a></li>
+          <li><a href="/privacy-policy#compliance" class="hover:text-[#111111] transition-colors">Conformidade LGPD & GDPR</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sub-footer copyright & bottom links -->
+    <div class="pt-8 border-t border-[#ebebeb] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#6b7280]">
+      <p class="text-center md:text-left leading-relaxed">
+        &copy; {new Date().getFullYear()} Extractyoutubescript. Todos os direitos reservados. Não somos afiliados, associados ou patrocinados pelo YouTube&trade; ou Google LLC.
+      </p>
+      <div class="flex items-center flex-wrap justify-center gap-4 text-xs font-medium text-[#4b5563]">
+        <a href="/about" class="hover:text-[#111111] transition-colors" data-i18n="header.nav_about">Sobre Nós</a>
+        <span>&bull;</span>
+        <a href="/contact" class="hover:text-[#111111] transition-colors" data-i18n="header.nav_contact">Contato</a>
+        <span>&bull;</span>
+        <a href="/privacy-policy" class="hover:text-[#111111] transition-colors" data-i18n="header.nav_privacy">Privacidade</a>
+        <span>&bull;</span>
+        <a href="/terms" class="hover:text-[#111111] transition-colors" data-i18n="header.nav_terms">Termos</a>
       </div>
     </div>
   </div>

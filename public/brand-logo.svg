@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64">
+  <defs>
+    <linearGradient id="fullBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF1A44"/>
+      <stop offset="50%" stop-color="#EE002D"/>
+      <stop offset="100%" stop-color="#C50022"/>
+    </linearGradient>
+    <linearGradient id="fullRimGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.03"/>
+    </linearGradient>
+  </defs>
+
+  <!-- App Icon Squircle (64x64 scaled to 48x48) -->
+  <g transform="translate(8, 8)">
+    <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="12" fill="url(#fullBrandGrad)"/>
+    <rect x="1.1" y="1.1" width="45.8" height="45.8" rx="11.6" fill="none" stroke="url(#fullRimGlow)" stroke-width="0.9"/>
+    <g transform="scale(0.75)">
+      <path d="M 15 19.5 C 15 17.6 17.1 16.4 18.7 17.4 L 30.8 25.4 C 32.3 26.4 32.3 28.6 30.8 29.6 L 18.7 37.6 C 17.1 38.6 15 37.4 15 35.5 Z" fill="#FFFFFF"/>
+      <rect x="35" y="19" width="14" height="5" rx="2.5" fill="#FFFFFF"/>
+      <rect x="35" y="28.5" width="17" height="5" rx="2.5" fill="#FFFFFF"/>
+      <rect x="35" y="38" width="11" height="5" rx="2.5" fill="#FFFFFF"/>
+    </g>
+  </g>
+
+  <!-- Wordmark Text -->
+  <text x="68" y="39" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5px">
+    <tspan fill="#111111">Extract</tspan><tspan fill="#EE002D">youtube</tspan><tspan fill="#111111">script</tspan>
+  </text>
+</svg>

@@ -64,7 +64,7 @@
           <button type="button" class="sample-btn px-2.5 py-1 rounded-[6px] bg-[#fafafa] border border-[#ebebeb] text-[#374151] hover:bg-[#f2f2f2] hover:text-[#111111] transition-colors text-xs font-medium shrink-0 cursor-pointer" data-url="https://www.youtube.com/watch?v=UF8uR6Z6KLc">
             Steve Jobs
           </button>
-          <button type="button" class="sample-btn px-2.5 py-1 rounded-[6px] bg-[#fafafa] border border-[#ebebeb] text-[#374151] hover:bg-[#f2f2f2] hover:text-[#111111] transition-colors text-xs font-medium shrink-0 cursor-pointer" data-url="https://www.youtube.com/watch?v=3qHkcs3kG6U">
+          <button type="button" class="sample-btn px-2.5 py-1 rounded-[6px] bg-[#fafafa] border border-[#ebebeb] text-[#374151] hover:bg-[#f2f2f2] hover:text-[#111111] transition-colors text-xs font-medium shrink-0 cursor-pointer" data-url="https://www.youtube.com/watch?v=L_Guz73e6fw">
             Lex Fridman
           </button>
         </div>
@@ -710,12 +710,19 @@
     showToast(state.stripSponsorsActive ? getTranslation('toast.sponsors_filtered', curLang) : getTranslation('toast.sponsors_restored', curLang));
   });
 
-  // Language selector: supports native YouTube tracks + translation
+  // Language selector: instant translation to any selected language
   langSelect?.addEventListener('change', async (e) => {
     const targetLang = (e.target as HTMLSelectElement).value;
-    if (!targetLang || targetLang === state.currentLang) return;
+    if (!targetLang) return;
 
-    if (state.segments.length === 0) return;
+    const normTarget = targetLang.toLowerCase().split('-')[0];
+    const normCurrent = (state.currentLang || '').toLowerCase().split('-')[0];
+    const normOrig = (state.originalLang || 'en').toLowerCase().split('-')[0];
+
+    // If already in this language, no re-translation needed
+    if (normTarget === normCurrent) return;
+
+    if (state.rawSegments.length === 0 && state.segments.length === 0) return;
 
     const curLang = getCurrentSiteLang();
     const selectedOptionText = langSelect.options[langSelect.selectedIndex]?.text || targetLang;
@@ -724,8 +731,8 @@
 
     try {
       // 1. If switching back to the video's original language, restore instantly!
-      if (targetLang === state.originalLang && state.originalSegments.length > 0) {
-        state.currentLang = targetLang;
+      if (normTarget === normOrig && state.originalSegments.length > 0) {
+        state.currentLang = state.originalLang || targetLang;
         state.rawSegments = JSON.parse(JSON.stringify(state.originalSegments));
         applyTrimmingAndFilters();
         if (statusLangBadge && statusLangText) {
@@ -737,48 +744,21 @@
         return;
       }
 
-      // 2. Check if video has native captions in target language
-      const isNative = state.availableLanguages.some((l: any) => l.code === targetLang);
-
-      if (isNative) {
-        const res = await fetch('/api/transcript', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            url: state.url,
-            lang: targetLang
-          })
-        });
-
-        const data = await res.json();
-        if (res.ok && data.segments && data.segments.length > 0) {
-          state.currentLang = targetLang;
-          state.rawSegments = data.segments;
-          applyTrimmingAndFilters();
-          if (statusLangBadge && statusLangText) {
-            statusLangText.textContent = `${data.currentLanguage?.name || selectedOptionText}${data.currentLanguage?.isOriginal ? ` ${getTranslation('status.native_tag', curLang)}` : ''}`;
-            statusLangBadge.classList.remove('hidden');
-            statusLangBadge.classList.add('inline-flex');
-          }
-          showToast(`${getTranslation('toast.loaded_native', curLang)} (${selectedOptionText})`);
-          return;
-        }
-      }
-
-      // 3. Translate using free translation engine
+      // 2. Translate using multi-engine translation pipeline
       const segmentsToTranslate = state.originalSegments.length > 0 ? state.originalSegments : state.rawSegments;
       const res = await fetch('/api/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           segments: segmentsToTranslate,
-          targetLang
+          targetLang: normTarget,
+          sourceLang: normOrig || 'auto'
         })
       });
 
       const data = await res.json();
       if (res.ok && data.segments && Array.isArray(data.segments) && data.segments.length > 0) {
-        state.currentLang = targetLang;
+        state.currentLang = normTarget;
         state.rawSegments = data.segments;
         applyTrimmingAndFilters();
         if (statusLangBadge && statusLangText) {
@@ -793,18 +773,21 @@
     } catch (err: any) {
       showToast(err.message || 'Could not translate transcript — keeping current language');
       langSelect.value = state.currentLang;
+      if (langSelect.selectedIndex === -1 && state.currentLang.includes('-')) {
+        langSelect.value = state.currentLang.split('-')[0];
+      }
     } finally {
       transSpinner?.classList.add('hidden');
     }
   });
 
-  const COMMON_LANGUAGES = [
+  const ALL_LANGUAGES = [
     { code: 'en', name: 'English' },
     { code: 'es', name: 'Spanish (Español)' },
+    { code: 'pt', name: 'Portuguese (Português)' },
     { code: 'fr', name: 'French (Français)' },
     { code: 'de', name: 'German (Deutsch)' },
     { code: 'it', name: 'Italian (Italiano)' },
-    { code: 'pt', name: 'Portuguese (Português)' },
     { code: 'ja', name: 'Japanese (日本語)' },
     { code: 'ko', name: 'Korean (한국어)' },
     { code: 'zh', name: 'Chinese (中文)' },
@@ -814,7 +797,14 @@
     { code: 'nl', name: 'Dutch (Nederlands)' },
     { code: 'tr', name: 'Turkish (Türkçe)' },
     { code: 'vi', name: 'Vietnamese (Tiếng Việt)' },
-    { code: 'pl', name: 'Polish (Polski)' }
+    { code: 'pl', name: 'Polish (Polski)' },
+    { code: 'id', name: 'Indonesian (Bahasa Indonesia)' },
+    { code: 'uk', name: 'Ukrainian (Українська)' },
+    { code: 'sv', name: 'Swedish (Svenska)' },
+    { code: 'el', name: 'Greek (Ελληνικά)' },
+    { code: 'he', name: 'Hebrew (עברית)' },
+    { code: 'th', name: 'Thai (ไทย)' },
+    { code: 'bn', name: 'Bengali (বাংলা)' }
   ];
 
   function updateLanguageDropdown() {
@@ -822,48 +812,45 @@
     langSelect.innerHTML = '';
     const curLang = getCurrentSiteLang();
 
-    const addedCodes = new Set<string>();
+    const origCode = (state.originalLang || 'en').toLowerCase().split('-')[0];
+    const currentCode = (state.currentLang || origCode).toLowerCase().split('-')[0];
 
-    // 1. Add native YouTube caption tracks detected for this video
-    if (state.availableLanguages && state.availableLanguages.length > 0) {
-      const nativeOptGroup = document.createElement('optgroup');
-      nativeOptGroup.label = getTranslation('status.native_group', curLang);
+    // Find the original language in our list or create entry
+    const origMatch = ALL_LANGUAGES.find(l => l.code === origCode);
+    const origName = origMatch ? origMatch.name : (state.originalLang ? state.originalLang.toUpperCase() : 'Original');
 
-      state.availableLanguages.forEach((l: any) => {
-        const opt = document.createElement('option');
-        opt.value = l.code;
-        opt.textContent = l.isOriginal ? `★ ${l.name} ${getTranslation('status.original_tag', curLang)}` : l.name;
-        if (l.code === state.currentLang) {
-          opt.selected = true;
-        }
-        nativeOptGroup.appendChild(opt);
-        addedCodes.add(l.code.toLowerCase());
-      });
-
-      langSelect.appendChild(nativeOptGroup);
+    // 1. Original Language Option at top
+    const origOpt = document.createElement('option');
+    origOpt.value = state.originalLang || 'en';
+    origOpt.textContent = `★ ${origName} (${getTranslation('status.original_tag', curLang)})`;
+    if (currentCode === origCode) {
+      origOpt.selected = true;
     }
+    langSelect.appendChild(origOpt);
 
-    // 2. Add translation options for other languages
+    // 2. Translation Options Group
     const transOptGroup = document.createElement('optgroup');
-    transOptGroup.label = getTranslation('status.translate_group', curLang);
+    transOptGroup.label = getTranslation('status.translate_group', curLang) || 'Translate to:';
 
-    COMMON_LANGUAGES.forEach(l => {
-      if (!addedCodes.has(l.code.toLowerCase())) {
+    ALL_LANGUAGES.forEach(l => {
+      if (l.code !== origCode) {
         const opt = document.createElement('option');
         opt.value = l.code;
         opt.textContent = l.name;
-        if (l.code === state.currentLang) {
+        if (l.code === currentCode) {
           opt.selected = true;
         }
         transOptGroup.appendChild(opt);
       }
     });
 
-    if (transOptGroup.children.length > 0) {
-      langSelect.appendChild(transOptGroup);
-    }
+    langSelect.appendChild(transOptGroup);
 
+    // Select the current language in dropdown
     langSelect.value = state.currentLang;
+    if (langSelect.selectedIndex === -1 && state.currentLang.includes('-')) {
+      langSelect.value = state.currentLang.split('-')[0];
+    }
   }
 
   function renderResults(data: any) {
@@ -882,6 +869,9 @@
     state.currentLang = data.currentLanguage?.code || data.originalLanguage || 'en';
     state.originalLang = data.originalLanguage || state.currentLang;
     state.availableLanguages = data.languages || [];
+    if (!state.originalSegments || state.originalSegments.length === 0) {
+      state.originalSegments = JSON.parse(JSON.stringify(state.rawSegments || []));
+    }
 
     if (statusLangBadge && statusLangText) {
       const curLang = getCurrentSiteLang();

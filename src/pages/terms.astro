@@ -1,0 +1,201 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const canonicalUrl = "https://extractyoutubescript.com/terms";
+const pageTitle = "Termos e Condições de Uso — Extractyoutubescript";
+const pageDescription = "Termos e Condições de Uso do Extractyoutubescript. Regras de acesso, respeito aos direitos autorais de vídeos do YouTube, fair use e isenção de responsabilidade.";
+
+const termsStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      "url": canonicalUrl,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://extractyoutubescript.com/#website",
+        "url": "https://extractyoutubescript.com",
+        "name": "Extractyoutubescript"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Início",
+            "item": "https://extractyoutubescript.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Termos de Uso",
+            "item": canonicalUrl
+          }
+        ]
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalUrl}
+  keywords="termos de uso, termos e condicoes, regras extractyoutubescript, direitos autorais youtube, fair use"
+  pageType="article"
+  structuredData={termsStructuredData}
+>
+  <Header />
+
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" class="mb-8 flex items-center gap-2 text-xs sm:text-sm text-[#6b7280]">
+      <a href="/" class="hover:text-[#111111] transition-colors flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span>Início</span>
+      </a>
+      <span class="text-gray-400">/</span>
+      <span class="text-[#111111] font-semibold" aria-current="page">Termos e Condições</span>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="space-y-4 mb-10 pb-8 border-b border-[#ebebeb]">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs sm:text-sm font-semibold">
+        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        <span>Condições Gerais do Serviço</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#111111] leading-tight">
+        Termos e Condições de Uso
+      </h1>
+      <div class="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-[#6b7280]">
+        <span>Data de vigência: 26 de Outubro de 2026</span>
+        <span>&bull;</span>
+        <span>Tempo de leitura: 6 minutos</span>
+      </div>
+    </header>
+
+    <!-- Main Legal Articles -->
+    <article class="space-y-10 sm:space-y-12 text-[#374151] leading-relaxed text-sm sm:text-base">
+
+      <!-- 1. Aceitação -->
+      <section class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#111111]">1. Aceitação dos Termos</h2>
+        <p>
+          Bem-vindo ao <strong>Extractyoutubescript</strong>. Ao acessar e utilizar este website (<a href="https://extractyoutubescript.com" class="text-blue-600 hover:underline">https://extractyoutubescript.com</a>), você concorda expressamente em cumprir estes Termos e Condições de Uso, bem como todas as leis e regulamentos aplicáveis. Se você não concordar com qualquer um destes termos, solicitamos que não continue a utilizar a plataforma.
+        </p>
+      </section>
+
+      <!-- 2. Descrição do Serviço -->
+      <section class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#111111]">2. Descrição do Serviço</h2>
+        <p>
+          O Extractyoutubescript é uma ferramenta web de produtividade que permite aos usuários extrair, transcrever, visualizar, traduzir e exportar faixas de texto e áudio de vídeos publicamente disponíveis no YouTube. O serviço é disponibilizado de forma 100% gratuita, sem necessidade prévia de registro ou pagamento.
+        </p>
+      </section>
+
+      <!-- 3. Direitos Autorais e Propriedade Intelectual -->
+      <section class="space-y-3 p-6 rounded-2xl bg-white border border-[#ebebeb] shadow-xs">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#111111] flex items-center gap-2">
+          <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          3. Propriedade Intelectual dos Conteúdos de Terceiros
+        </h2>
+        <p>
+          <strong>O Extractyoutubescript não reivindica nem possui quaisquer direitos autorais ou de propriedade intelectual sobre os vídeos, áudios, roteiros ou transcrições processados através do serviço.</strong>
+        </p>
+        <p>
+          Todo o conteúdo audiovisual, falas, trilhas sonoras e imagens pertencem exclusivamente aos seus respectivos criadores, canais e detentores de direitos no YouTube. O usuário é o único e exclusivo responsável por assegurar que o uso das transcrições extraídas respeite as leis de direitos autorais de sua jurisdição, as diretrizes de <em>Uso Justo (Fair Use)</em>, citação de fontes para fins acadêmicos, jornalísticos ou de pesquisa.
+        </p>
+      </section>
+
+      <!-- 4. Uso Permitido e Condutas Proibidas -->
+      <section class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#111111]">4. Condutas Permitidas e Proibidas</h2>
+        <p>
+          Você concorda em utilizar a ferramenta exclusivamente para finalidades lícitas. É terminantemente proibido:
+        </p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>Executar ataques de negação de serviço (DoS/DDoS) ou sobrecarregar intencionalmente nossos servidores e endpoints de API;</li>
+          <li>Utilizar robôs, scrapers agressivos ou automações abusivas que prejudiquem a disponibilidade do serviço para os demais usuários;</li>
+          <li>Burlar mecanismos de segurança, limites de taxa (rate limiting) ou tentar acessar sistemas internos não autorizados;</li>
+          <li>Utilizar o serviço para transcrever ou disseminar conteúdos que promovam discurso de ódio, violência, pornografia infantil ou violações criminais da lei.</li>
+        </ul>
+      </section>
+
+      <!-- 5. Isenção de Garantias ("As Is") -->
+      <section class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#111111]">5. Isenção de Garantias</h2>
+        <p>
+          O serviço é fornecido no estado em que se encontra ("as is") e conforme disponível ("as available"). Embora nos esforcemos para entregar a mais alta qualidade técnica:
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li>Não garantimos que as legendas geradas automaticamente ou traduções por inteligência artificial estejam 100% livres de erros gramaticais ou fonéticos;</li>
+          <li>Não garantimos que o serviço funcionará ininterruptamente, sem falhas de rede ou imune a manutenções preventivas;</li>
+          <li>Não nos responsabilizamos pela indisponibilidade temporária provocada por mudanças na infraestrutura de terceiros (como a plataforma YouTube).</li>
+        </ul>
+      </section>
+
+      <!-- 6. Aviso Legal sobre YouTube e Google LLC -->
+      <section id="disclaimer" class="space-y-3 p-6 rounded-2xl bg-amber-50 border border-amber-200 text-amber-950">
+        <h2 class="text-xl sm:text-2xl font-bold flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-700 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+          </svg>
+          6. Não Afiliação com o YouTube™ / Google LLC
+        </h2>
+        <p class="text-sm sm:text-base leading-relaxed">
+          O <strong>Extractyoutubescript</strong> é uma iniciativa web independente e não possui nenhum vínculo societário, representação legal, afiliação, patrocínio ou endosso da <strong>Google LLC</strong> ou do <strong>YouTube</strong>.
+        </p>
+        <p class="text-xs text-amber-800">
+          YouTube™ é marca registrada pertencente à Google LLC. Todas as marcas, logotipos e nomes de empresas mencionados em nosso site pertencem a seus respectivos titulares e são utilizados estritamente para identificação compatível de serviço.
+        </p>
+      </section>
+
+      <!-- 7. Limitação de Responsabilidade -->
+      <section class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#111111]">7. Limitação de Responsabilidade</h2>
+        <p>
+          Em nenhuma hipótese o Extractyoutubescript, seus desenvolvedores ou mantenedores serão responsáveis por quaisquer danos diretos, indiretos, incidentais, especiais ou consequenciais (incluindo, sem limitação, perda de dados, interrupção de negócios ou perda de lucros) decorrentes do uso ou da incapacidade de usar este serviço.
+        </p>
+      </section>
+
+      <!-- 8. Modificações e Atualizações -->
+      <section class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#111111]">8. Alterações nestes Termos</h2>
+        <p>
+          Reservamo-nos o direito de revisar e atualizar estes Termos e Condições a qualquer momento. A versão mais atualizada estará sempre publicada nesta página com a respectiva data de vigência. O uso continuado da plataforma após quaisquer alterações constituirá sua aceitação das novas condições.
+        </p>
+      </section>
+
+      <!-- 9. Dúvidas e Contato -->
+      <section class="space-y-3 p-6 rounded-2xl bg-gray-50 border border-[#ebebeb]">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#111111]">9. Dúvidas e Canal de Atendimento</h2>
+        <p>
+          Se tiver dúvidas ou questionamentos sobre estes Termos e Condições, favor entrar em contato através dos canais oficiais:
+        </p>
+        <div class="space-y-1 text-sm">
+          <p><strong>E-mail:</strong> <a href="mailto:contato@extractyoutubescript.com" class="text-blue-600 hover:underline">contato@extractyoutubescript.com</a></p>
+          <p><strong>Formulário de Contato:</strong> <a href="/contact" class="text-blue-600 hover:underline">extractyoutubescript.com/contact</a></p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
