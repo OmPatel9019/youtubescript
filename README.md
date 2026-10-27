@@ -124,11 +124,6 @@ Inside of your Astro project, you'll see the following folders and files:
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
@@ -139,6 +134,91 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## ⚙️ Getting Started
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Follow these steps to run the project locally.
+
+### Prerequisites
+
+Make sure you have installed:
+
+- [Node.js](https://nodejs.org/) — use a version compatible with your project.
+- npm (included with Node.js) or your project's package manager.
+- Git.
+
+### 1. Clone the Repository
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+cd YOUR_PROJECT_DIRECTORY
+```
+
+Replace the placeholders with your actual GitHub repository URL and directory name.
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the appropriate project directory and add the environment variables required by your application.
+
+Example:
+
+```env
+YOUTUBE_API_KEY=your_youtube_api_key
+AI_TRANSCRIPTION_API_KEY=your_ai_api_key
+```
+
+These are illustrative variable names. Use the exact names expected by your source code, and only configure the keys required by your implementation.
+
+**Important:** Never commit your `.env` file or expose private API keys in frontend code. Add `.env` to `.gitignore`.
+
+### 4. Start the Development Server
+
+For an Astro application, the usual command is:
+
+```bash
+npm run dev
+```
+
+Open the local URL printed in your terminal, commonly:
+
+```text
+http://localhost:4321
+```
+
+If your backend runs as a separate Node.js service, open another terminal and start it using the backend's configured development script.
+
+For example:
+
+```bash
+npm run dev
+```
+
+Run this second command from the backend directory only if its `package.json` defines that script.
+
+### 5. Build for Production
+
+To build the Astro frontend:
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+For a separate Node.js backend, follow its own build and start scripts if applicable.
+
+### Troubleshooting
+
+- **Missing environment variables:** Check that your `.env` file contains the variable names expected by the application.
+- **Port already in use:** Stop the other process or configure a different port.
+- **Transcript extraction fails:** Verify your API configuration, video accessibility, service limits, and backend logs.
+- **Dependency errors:** Check your Node.js version and follow the repository's lockfile and package-manager conventions.
